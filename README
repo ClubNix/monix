@@ -1,2 +1,4 @@
 Club*Nix project aiming to replace the physical
 whiteboard for fridge debt
+
+you need libmongoclient.a (the static lib) in a directory named "Driver"
