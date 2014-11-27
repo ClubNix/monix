@@ -24,12 +24,12 @@ ifeq ($(config),)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/monix
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -LDriver/libmongoclient.a
-  LIBS      += -lmongoclient
+  LDFLAGS   += -LDriver
+  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -42,6 +42,8 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/main.o \
+	$(OBJDIR)/mongo.o \
 
 RESOURCES := \
 
@@ -102,5 +104,11 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
+$(OBJDIR)/main.o: src/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/mongo.o: src/mongo.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
