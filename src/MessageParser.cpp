@@ -16,6 +16,18 @@ Action* MessageParser::getAction(std::string message){
 				Action *newAction = new Parameter(parsedMessage);
 				newAction->parameter(action);
 				action = newAction;
+			}else if(parsedMessage == "account"){
+				Action *newAction = new Parameter(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
+			}else if(parsedMessage == "stock"){
+				Action *newAction = new Parameter(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
+			}else if(parsedMessage == "log"){
+				Action *newAction = new Parameter(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
 			}else if(parsedMessage == "add"){
 				Action *newAction = new Parameter(parsedMessage);
 				newAction->parameter(action);
