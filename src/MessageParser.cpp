@@ -1,18 +1,38 @@
-#include "MessageParser.h"
 #include <regex>
+#include <iostream>
+#include "MessageParser.h"
+#include "Action.h"
+#include "Parameter.h"
+#include "Value.h"
 
-std::string MessageParser::getAction(std::string message){
+Action* MessageParser::getAction(std::string message){
 	std::regex regexp("(\\w*):");
 	std::smatch match;
-	if(std::regex_search(message, match, regexp)){ // while ça -> decorer
-		std::string parsedMessage;
+	if(std::regex_search(message, match, regexp)){
+		Action *action = nullptr;
 		while(std::regex_search(message, match, regexp)){
-			parsedMessage += std::string(match[1]) + std::string(" | ");
+			std::string parsedMessage(match[1]);
+			if(parsedMessage == "member"){
+				Action *newAction = new Parameter(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
+			}else if(parsedMessage == "add"){
+				Action *newAction = new Parameter(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
+			}else{
+				Action *newAction = new Value(parsedMessage);
+				newAction->parameter(action);
+				action = newAction;
+			}
 			message = match.suffix().str();
 		}
-		return parsedMessage + message;
+		Action *newAction = new Value(message);
+		newAction->parameter(action);
+		action = newAction;
+		return action;
 	}else{
-		return "";
+		return nullptr;
 	}
 }
 

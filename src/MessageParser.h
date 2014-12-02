@@ -5,7 +5,7 @@
 
 class MessageParser{
 public:
-	static std::string getAction(std::string message);
+	static Action* getAction(std::string message);
 };
 
 #endif /* __MessageParser_H__ */

@@ -20,7 +20,8 @@ int main(){
 	}
 	
 	MessageParser parser;
-	std::cout << MessageParser::getAction("member:add:cirno") << std::endl;
-	
+	Action *action = MessageParser::getAction("member:add:cirno");
+	action->execute();
+	delete action;
 	return EXIT_SUCCESS;
 }

@@ -11,7 +11,9 @@ ifndef CC
   CC = gcc
 endif
 
-  CXX = clang++
+ifndef CXX
+  CXX = g++
+endif
 
 ifndef AR
   AR = ar
@@ -41,8 +43,11 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/MessageParser.o \
+	$(OBJDIR)/Action.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/Value.o \
 	$(OBJDIR)/mongo.o \
+	$(OBJDIR)/Parameter.o \
 
 RESOURCES := \
 
@@ -106,10 +111,19 @@ endif
 $(OBJDIR)/MessageParser.o: src/MessageParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Action.o: src/Action.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Value.o: src/Value.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/mongo.o: src/mongo.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Parameter.o: src/Parameter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
