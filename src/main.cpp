@@ -18,11 +18,13 @@ int main(){
 		std::cout << "caught" << e.what() << std::endl;
 	}
 	
-	MessageParser parser;
-	Action *action = MessageParser::getAction("member:add:cirno");
-	action->execute();
-	delete action;
 	Socket socket;
-	socket.receive();
+	int end = socket.receive();
+	while(!end){
+		Action *action = MessageParser::getAction(socket.message());
+		action->execute();
+		delete action;
+		end = socket.receive();
+	}
 	return EXIT_SUCCESS;
 }

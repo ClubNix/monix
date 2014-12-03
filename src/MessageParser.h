@@ -5,6 +5,7 @@
 
 class MessageParser{
 public:
+	MessageParser() = delete;
 	static Action* getAction(std::string message);
 };
 

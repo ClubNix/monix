@@ -9,8 +9,11 @@ int Socket::receive(){
 	zmq::message_t zmessage;
 	socket_.recv(&zmessage);
 
-	std::string message(static_cast<char*>(zmessage.data()), zmessage.size());
-	std::cout << message << std::endl;
-	return 0;
+	message_ = std::string(static_cast<char*>(zmessage.data()), zmessage.size());
+	return message_ == "quit";
+}
+
+std::string Socket::message() const{
+	return message_;
 }
 
