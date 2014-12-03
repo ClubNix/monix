@@ -29,7 +29,7 @@ ifeq ($(config),)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11 -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem
+  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -48,6 +48,7 @@ OBJECTS := \
 	$(OBJDIR)/Value.o \
 	$(OBJDIR)/mongo.o \
 	$(OBJDIR)/Parameter.o \
+	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
 
@@ -124,6 +125,9 @@ $(OBJDIR)/mongo.o: src/mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Parameter.o: src/Parameter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Socket.o: src/Socket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

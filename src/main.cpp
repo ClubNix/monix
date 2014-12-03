@@ -2,11 +2,10 @@
 #include <iostream>
 #include "mongo/client/dbclient.h"
 #include "MessageParser.h"
-
-using namespace mongo;
+#include "Socket.h"
 
 void run(){
-	DBClientConnection c;
+	mongo::DBClientConnection c;
 	c.connect("localhost");
 }
 
@@ -15,7 +14,7 @@ int main(){
 	try{
 		run();
 		std::cout << "connected ok" << std::endl;
-	} catch(const DBException &e){
+	} catch(const mongo::DBException &e){
 		std::cout << "caught" << e.what() << std::endl;
 	}
 	
@@ -23,5 +22,7 @@ int main(){
 	Action *action = MessageParser::getAction("member:add:cirno");
 	action->execute();
 	delete action;
+	Socket socket;
+	socket.receive();
 	return EXIT_SUCCESS;
 }
