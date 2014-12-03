@@ -2,7 +2,7 @@
 #include <iostream>
 
 Socket::Socket() : socket_(context_, ZMQ_PULL){
-	socket_.bind("ipc:///tmp/monix.ipc");
+	socket_.bind("tcp://*:42923");
 }
 
 int Socket::receive(){
