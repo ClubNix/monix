@@ -26,10 +26,10 @@ ifeq ($(config),)
   DEFINES   += 
   INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem
+  LDFLAGS   += -std=c++11 -LDriver
+  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -42,8 +42,13 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/MessageParser.o \
+	$(OBJDIR)/Action.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/Value.o \
 	$(OBJDIR)/mongo.o \
+	$(OBJDIR)/Parameter.o \
+	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
 
@@ -104,10 +109,25 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
+$(OBJDIR)/MessageParser.o: src/MessageParser.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Action.o: src/Action.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Value.o: src/Value.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/mongo.o: src/mongo.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Parameter.o: src/Parameter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Socket.o: src/Socket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
