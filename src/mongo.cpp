@@ -7,7 +7,7 @@
 using namespace mongo;
 
 Mongo::Mongo(){
-	name_ = "nix.monix";
+	dbName_ = "nix.monix";
     connection_ = new DBClientConnection();
 	try{
 		connection_->connect("localhost");
@@ -20,7 +20,13 @@ Mongo::Mongo(){
 
 void Mongo::addUser(std::string pseudo, float money){
     BSONObjBuilder builder;
-    builder.append("id_", pseudo);
+    builder.append("_id", pseudo);
     builder.append("money", money);
-    connection_->insert(name_, builder.obj());
+    connection_->insert(dbName_, builder.obj());
+}
+
+void Mongo::removeUser(std::string pseudo){
+    BSONObjBuilder builder;
+    builder.append("_id", pseudo);
+    connection_->remove(dbName_, builder.obj());
 }

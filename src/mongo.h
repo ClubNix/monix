@@ -3,12 +3,13 @@
 
 class Mongo{
 	private:
-		std::string name_;
+		std::string dbName_;
 		mongo::DBClientConnection* connection_;
 		
 	public:
 		Mongo();
         void addUser(std::string pseudo, float money);
+        void removeUser(std::string pseudo);
 };
 
 #endif /* __mongo_H__ */
