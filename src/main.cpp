@@ -1,21 +1,13 @@
 #include <cstdlib>
 #include <iostream>
 #include "mongo/client/dbclient.h"
+#include "mongo.h"
 
 using namespace mongo;
 
-void run(){
-	DBClientConnection c;
-	c.connect("localhost");
-}
-
 int main(){
-	//client::initialize();
-	try{
-		run();
-		std::cout << "connected ok" << std::endl;
-	} catch(const DBException &e){
-		std::cout << "caught" << e.what() << std::endl;
-	}
-	return EXIT_SUCCESS;
+	Mongo database;
+    database.addUser("Nepta", 9);
+	
+	return 0;
 }
