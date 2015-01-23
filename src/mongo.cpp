@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <string>
 #include "mongo/client/dbclient.h"
 
 #include "mongo.h"
@@ -45,4 +46,15 @@ void Mongo::incMoney(std::string pseudo, float money){
 		BSON("_id" << pseudo),
 		BSON("$inc" << BSON("money" << money))
 	);
+}
+
+void Mongo::displayMembers(){
+	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
+	float sum;
+	while(cursor->more()){
+		BSONObj p = cursor->next();
+		float value = p.getField("money").number();
+		sum += value;
+	}
+	std::cout << "Sum: " << sum << std::endl;
 }
