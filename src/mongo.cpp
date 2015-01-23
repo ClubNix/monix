@@ -30,3 +30,19 @@ void Mongo::removeUser(std::string pseudo){
     builder.append("_id", pseudo);
     connection_->remove(dbName_, builder.obj());
 }
+
+void Mongo::setMoney(std::string pseudo, float money){
+	connection_->update(
+		dbName_,
+		BSON("_id" << pseudo),
+		BSON("$set" << BSON("money" << money))
+	);
+}
+
+void Mongo::incMoney(std::string pseudo, float money){
+	connection_->update(
+		dbName_,
+		BSON("_id" << pseudo),
+		BSON("$inc" << BSON("money" << money))
+	);
+}

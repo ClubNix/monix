@@ -7,7 +7,7 @@ using namespace mongo;
 
 int main(){
 	Mongo database;
-    database.addUser("Nepta", 9);
+    database.setMoney("Mute", 8);
 	
 	return 0;
 }
