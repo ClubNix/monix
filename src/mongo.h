@@ -8,8 +8,8 @@ class Mongo{
 		
 	public:
 		Mongo();
-        void addUser(std::string pseudo, float money);
-        void removeUser(std::string pseudo);
+		void addUser(std::string pseudo, float money);
+		void removeUser(std::string pseudo);
 		void setMoney(std::string pseudo, float money);
 		void incMoney(std::string pseudo, float money);
 		void displayMembers();
