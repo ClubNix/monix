@@ -15,6 +15,7 @@ int main(){
 	while(!end){
 		Action *action = MessageParser::getAction(socket.message());
 		action->execute();
+		std::cerr << std::endl;
 		delete action;
 		end = socket.receive();
 	}

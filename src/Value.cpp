@@ -6,6 +6,6 @@ Value::Value(std::string value) : Action(value){
 
 void Value::execute(){
 	Action::execute();
-	std::cerr << message() << std::endl;
+	std::cerr << "[" << message() << "] -> ";
 }
 

@@ -27,10 +27,7 @@ Action* MessageParser::getAction(std::string message){
 				newAction = new Parameter(parsedMessage);
 			}else{
 				//if we don't know the word, it's a value
-				newAction = new Value(message);
-				newAction->parameter(action);
-				action = newAction;
-				return action;
+				newAction = new Value(parsedMessage);
 			}
 			newAction->parameter(action);
 			action = newAction;			
