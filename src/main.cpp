@@ -5,12 +5,10 @@
 #include "Socket.h"
 #include "mongo.h"
 
-using namespace mongo;
-
 int main(){
 	//client::initialize();
 	Mongo database;
-    database.addUser("Nepta", 9);
+	database.addUser("Nepta", 9);
 	
 	Socket socket;
 	int end = socket.receive();

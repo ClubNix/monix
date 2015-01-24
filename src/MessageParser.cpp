@@ -40,7 +40,6 @@ Action* MessageParser::getAction(std::string message){
 		newAction = new Value(message);
 		newAction->parameter(action);
 		action = newAction;
-		std::cout << "foo" << std::endl;
 		return action;
 	}else{
 		return nullptr;
