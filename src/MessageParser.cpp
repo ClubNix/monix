@@ -4,44 +4,43 @@
 #include "Action.h"
 #include "Parameter.h"
 #include "Value.h"
+#include "Member.h"
+
 
 Action* MessageParser::getAction(std::string message){
 	std::regex regexp("(\\w*):");
 	std::smatch match;
 	if(std::regex_search(message, match, regexp)){
 		Action *action = nullptr;
+		Action *newAction = nullptr;
 		while(std::regex_search(message, match, regexp)){
 			std::string parsedMessage(match[1]);
 			if(parsedMessage == "member"){
-				Action *newAction = new Parameter(parsedMessage);
-				newAction->parameter(action);
-				action = newAction;
+				newAction = new Member();
 			}else if(parsedMessage == "account"){
-				Action *newAction = new Parameter(parsedMessage);
-				newAction->parameter(action);
-				action = newAction;
+				newAction = new Parameter(parsedMessage);
 			}else if(parsedMessage == "stock"){
-				Action *newAction = new Parameter(parsedMessage);
-				newAction->parameter(action);
-				action = newAction;
+				newAction = new Parameter(parsedMessage);
 			}else if(parsedMessage == "log"){
-				Action *newAction = new Parameter(parsedMessage);
-				newAction->parameter(action);
-				action = newAction;
+				newAction = new Parameter(parsedMessage);
 			}else if(parsedMessage == "add"){
-				Action *newAction = new Parameter(parsedMessage);
-				newAction->parameter(action);
-				action = newAction;
+				newAction = new Parameter(parsedMessage);
 			}else{
-				Action *newAction = new Value(parsedMessage);
+				//if we don't know the word, it's a value
+				newAction = new Value(message);
 				newAction->parameter(action);
 				action = newAction;
+				return action;
 			}
+			newAction->parameter(action);
+			action = newAction;			
 			message = match.suffix().str();
 		}
-		Action *newAction = new Value(message);
+		//last part of message is always a value (member:add:<cirno>)
+		newAction = new Value(message);
 		newAction->parameter(action);
 		action = newAction;
+		std::cout << "foo" << std::endl;
 		return action;
 	}else{
 		return nullptr;
