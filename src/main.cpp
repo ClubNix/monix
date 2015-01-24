@@ -9,6 +9,7 @@ int main(){
 	Mongo database;
 	// database.setMoney("Mute", 8);
 	database.displayMembers();
+	database.displaySum();
 	
 	return 0;
 }

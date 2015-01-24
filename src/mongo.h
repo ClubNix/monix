@@ -13,6 +13,7 @@ class Mongo{
 		void setMoney(std::string pseudo, float money);
 		void incMoney(std::string pseudo, float money);
 		void displayMembers();
+		void displaySum();
 };
 
 #endif /* __mongo_H__ */

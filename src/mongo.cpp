@@ -50,6 +50,14 @@ void Mongo::incMoney(std::string pseudo, float money){
 
 void Mongo::displayMembers(){
 	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
+	while(cursor->more()){
+		BSONObj p = cursor->next();
+		std::cout << p.toString() << std::endl;
+	}
+}
+
+void Mongo::displaySum(){
+	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
 	float sum;
 	while(cursor->more()){
 		BSONObj p = cursor->next();
