@@ -49,6 +49,7 @@ OBJECTS := \
 	$(OBJDIR)/RPC.o \
 	$(OBJDIR)/mongo.o \
 	$(OBJDIR)/Member.o \
+	$(OBJDIR)/MongoWrapper.o \
 	$(OBJDIR)/Parameter.o \
 	$(OBJDIR)/Socket.o \
 
@@ -130,6 +131,9 @@ $(OBJDIR)/mongo.o: src/mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Member.o: src/Member.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MongoWrapper.o: src/MongoWrapper.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Parameter.o: src/Parameter.cpp

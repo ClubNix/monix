@@ -5,15 +5,16 @@
 
 
 class RPC{
-	typedef void (*function)(std::string);
-	std::unordered_map<std::string, function> subscribedFunction_;
+	typedef void (*wrappedFunction)(std::vector<std::string>);
+	std::unordered_map<std::string, wrappedFunction> subscribedFunction_;
 
 public:
 	std::string getFunctionName(std::string functionString);
 	std::vector<std::string> getParameter(std::string functionString);
-	void subscribleFunction(std::string functionName, void (*function)(std::string));
-	bool isAnExistingFunction(std::string functionName);
 	std::vector<std::string> split(std::string s, std::string delimiter);
+	void subscribleFunction(std::string functionName, wrappedFunction function);
+	bool isAnExistingFunction(std::string functionName);
+	void execute(std::string functionName, std::vector<std::string> parameter);
 };
 
 #endif /* __rpc_H__ */

@@ -1,10 +1,10 @@
 #include <cstdlib>
 #include <iostream>
-#include "mongo/client/dbclient.h"
 #include "MessageParser.h"
 #include "Socket.h"
 #include "mongo.h"
 #include "RPC.h"
+#include "MongoWrapper.h"
 
 int main(){
 	//client::initialize();
@@ -21,11 +21,8 @@ int main(){
 //		end = socket.receive();
 //	}
 	RPC rpc;
-	std::string functionString("addMember('Nepta',9)");
-	std::cout << "functionName: " << rpc.getFunctionName(functionString) << std::endl;
-	for(std::string s : rpc.getParameter(functionString)){
-		std::cout << s << " ";
-	}
-	std::cout << std::endl;
+	rpc.subscribleFunction("addUser",MongoWrapper::addUser);
+	rpc.execute("miaou",{"42"});
+	rpc.execute("addUser",{"'Nepta'","9"});
 	return EXIT_SUCCESS;
 }

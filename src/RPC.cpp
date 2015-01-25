@@ -17,15 +17,6 @@ std::vector<std::string> RPC::getParameter(std::string functionString){
 	return split(match[1],",");
 }
 
-void RPC::subscribleFunction(std::string functionName, void (*function)(std::string)){
-	subscribedFunction_[functionName] = function;
-}
-
-bool RPC::isAnExistingFunction(std::string functionName){
-	return subscribedFunction_.count(functionName) > 0;
-}
-
-
 //code from : http://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 std::vector<std::string> RPC::split(std::string s, std::string delimiter){
 	size_t pos = 0;
@@ -36,5 +27,21 @@ std::vector<std::string> RPC::split(std::string s, std::string delimiter){
 	}
 	token.push_back(s.substr(0, pos));
 	return token;
+}
+
+void RPC::subscribleFunction(std::string functionName, RPC::wrappedFunction function){
+	subscribedFunction_[functionName] = function;
+}
+
+bool RPC::isAnExistingFunction(std::string functionName){
+	return subscribedFunction_.count(functionName) > 0;
+}
+
+void RPC::execute(std::string functionName, std::vector<std::string> parameter){
+	if(isAnExistingFunction(functionName)){
+		subscribedFunction_[functionName](parameter);
+	}else{
+		std::cerr << functionName << " don't exist" << std::endl;
+	}
 }
 
