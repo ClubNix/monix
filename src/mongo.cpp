@@ -32,6 +32,23 @@ void Mongo::removeUser(std::string pseudo){
 	connection_->remove(dbName_, builder.obj());
 }
 
+void Mongo::renameUser(std::string pseudo, std::string newPseudo){
+	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
+	std::string currentPseudo = "";
+	while(cursor->more()){
+		BSONObj obj = cursor->next();
+		currentPseudo = obj.getStringField("_id");
+		std::cout << currentPseudo << std::endl;
+		if(currentPseudo == newPseudo){
+			std::cout << "Error: The new pseudo already exists" << std::endl;
+			return;
+		}
+	}
+	float savedMoney = getMemberMoney(pseudo);
+	removeUser(pseudo);
+	addUser(newPseudo, savedMoney);
+}
+
 void Mongo::setMoney(std::string pseudo, float money){
 	connection_->update(
 		dbName_,
@@ -65,4 +82,11 @@ void Mongo::displaySum(){
 		sum += value;
 	}
 	std::cout << "Sum: " << sum << std::endl;
+}
+
+float Mongo::getMemberMoney(std::string pseudo){
+	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, QUERY("_id" << pseudo));
+	BSONObj obj = cursor->next();
+	float money = obj.getField("money").number();
+	return money;
 }
