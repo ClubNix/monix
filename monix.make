@@ -46,6 +46,7 @@ OBJECTS := \
 	$(OBJDIR)/Action.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Value.o \
+	$(OBJDIR)/RPC.o \
 	$(OBJDIR)/mongo.o \
 	$(OBJDIR)/Member.o \
 	$(OBJDIR)/Parameter.o \
@@ -120,6 +121,9 @@ $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Value.o: src/Value.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/RPC.o: src/RPC.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/mongo.o: src/mongo.cpp
