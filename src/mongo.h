@@ -11,11 +11,14 @@ class Mongo{
 		void addUser(std::string pseudo, float money);
 		void removeUser(std::string pseudo);
 		void renameUser(std::string pseudo, std::string newPseudo);
-		void setMoney(std::string pseudo, float money);
-		void incMoney(std::string pseudo, float money);
+		void setUserBalance(std::string pseudo, float money);
+		void incUserBalance(std::string pseudo, float money);
+		void incUserBalanceByOne(std::string pseudo);
+		void decUserBalance(std::string pseudo, float money);
+		void decUserBalanceByOne(std::string pseudo);
 		void displayMembers();
 		void displaySum();
-		float getMemberMoney(std::string pseudo);
+		float getUserBalance(std::string pseudo);
 };
 
 #endif /* __mongo_H__ */

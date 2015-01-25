@@ -7,12 +7,12 @@ using namespace mongo;
 
 int main(){
 	Mongo database;
-	// database.setMoney("Mute", 8);
-	database.renameUser("Obsi", "Nepta");
+
 	database.displayMembers();
-	// database.displaySum();
-	float v = database.getMemberMoney("Nepta");
-	std::cout << v << std::endl;
+	database.decUserBalance("Obsi", 1);
+	database.displayMembers();
+	database.incUserBalanceByOne("Obsi");
+	database.displayMembers();
 
 	return 0;
 }

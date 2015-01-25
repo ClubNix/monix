@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <cassert>
 #include <iostream>
 #include <string>
 #include "mongo/client/dbclient.h"
@@ -44,12 +45,12 @@ void Mongo::renameUser(std::string pseudo, std::string newPseudo){
 			return;
 		}
 	}
-	float savedMoney = getMemberMoney(pseudo);
+	float savedMoney = getUserBalance(pseudo);
 	removeUser(pseudo);
 	addUser(newPseudo, savedMoney);
 }
 
-void Mongo::setMoney(std::string pseudo, float money){
+void Mongo::setUserBalance(std::string pseudo, float money){
 	connection_->update(
 		dbName_,
 		BSON("_id" << pseudo),
@@ -57,12 +58,31 @@ void Mongo::setMoney(std::string pseudo, float money){
 	);
 }
 
-void Mongo::incMoney(std::string pseudo, float money){
+void Mongo::incUserBalance(std::string pseudo, float money){
+	assert(money >= 0);
 	connection_->update(
 		dbName_,
 		BSON("_id" << pseudo),
 		BSON("$inc" << BSON("money" << money))
 	);
+}
+
+void Mongo::incUserBalanceByOne(std::string pseudo){
+	incUserBalance(pseudo, 1);
+}
+
+void Mongo::decUserBalance(std::string pseudo, float money){
+	assert(money >= 0);
+	money *= -1;
+	connection_->update(
+		dbName_,
+		BSON("_id" << pseudo),
+		BSON("$inc" << BSON("money" << money))
+	);
+}
+
+void Mongo::decUserBalanceByOne(std::string pseudo){
+	decUserBalance(pseudo, 1);
 }
 
 void Mongo::displayMembers(){
@@ -84,7 +104,7 @@ void Mongo::displaySum(){
 	std::cout << "Sum: " << sum << std::endl;
 }
 
-float Mongo::getMemberMoney(std::string pseudo){
+float Mongo::getUserBalance(std::string pseudo){
 	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, QUERY("_id" << pseudo));
 	BSONObj obj = cursor->next();
 	float money = obj.getField("money").number();
