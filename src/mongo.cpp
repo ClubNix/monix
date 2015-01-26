@@ -99,7 +99,7 @@ void Mongo::displayMembers(){
 
 void Mongo::displaySum(){
 	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
-	float sum;
+	float sum = 0;
 	while(cursor->more()){
 		BSONObj p = cursor->next();
 		float value = p.getField("money").number();
