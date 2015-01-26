@@ -13,6 +13,6 @@ local socket,err = context:socket{zmq.PUSH, connect = "tcp://localhost:42923"}
 --	socket:send(message)
 --until message == "quit"
 
-socket:send("member:add:cirno")
-socket:send("stock:cola:9")
+socket:send("addUser(Cirno,9)")
+socket:send("displayMembers()")
 socket:send("quit")

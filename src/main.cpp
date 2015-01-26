@@ -13,15 +13,6 @@ int main(){
 	database.renameUser("Mute","Fira");
 	database.displayMembers();
 
-	Socket socket;
-//	int end = socket.receive();
-//	while(!end){
-//		Action *action = MessageParser::getAction(socket.message());
-//		action->execute();
-//		std::cerr << std::endl;
-//		delete action;
-//		end = socket.receive();
-//	}
 	RPC rpc;
 	rpc.subscribleFunction("addUser",MongoWrapper::addUser);
 	rpc.subscribleFunction("removeUser",MongoWrapper::removeUser);
@@ -33,10 +24,16 @@ int main(){
 	rpc.subscribleFunction("decUserBalanceByOne",MongoWrapper::decUserBalanceByOne);
 	rpc.subscribleFunction("displayMembers",MongoWrapper::displayMembers);
 	rpc.subscribleFunction("displaySum",MongoWrapper::displaySum);
+
+	Socket socket;
+	int end = socket.receive();
+	while(!end){
+		std::string message = socket.message();
+		std::string functionName = rpc.getFunctionName(message);
+		std::vector<std::string> parameter = rpc.getParameter(message);
+		rpc.execute(functionName, parameter);
+		end = socket.receive();
+	}
 	
-	rpc.execute("miaou",{"42"});
-	rpc.execute("addUser",{"Nepta","9"});
-	rpc.execute("decUserBalanceByOne",{"Nepta"});
-	rpc.execute("displaySum",{});
 	return EXIT_SUCCESS;
 }
