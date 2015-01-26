@@ -24,7 +24,19 @@ int main(){
 //	}
 	RPC rpc;
 	rpc.subscribleFunction("addUser",MongoWrapper::addUser);
+	rpc.subscribleFunction("removeUser",MongoWrapper::removeUser);
+	rpc.subscribleFunction("renameUser",MongoWrapper::renameUser);
+	rpc.subscribleFunction("setUserBalance",MongoWrapper::setUserBalance);
+	rpc.subscribleFunction("incUserBalance",MongoWrapper::incUserBalance);
+	rpc.subscribleFunction("decUserBalance",MongoWrapper::decUserBalance);
+	rpc.subscribleFunction("incUserBalanceByOne",MongoWrapper::incUserBalanceByOne);
+	rpc.subscribleFunction("decUserBalanceByOne",MongoWrapper::decUserBalanceByOne);
+	rpc.subscribleFunction("displayMembers",MongoWrapper::displayMembers);
+	rpc.subscribleFunction("displaySum",MongoWrapper::displaySum);
+	
 	rpc.execute("miaou",{"42"});
-	rpc.execute("addUser",{"'Nepta'","9"});
+	rpc.execute("addUser",{"Nepta","9"});
+	rpc.execute("decUserBalanceByOne",{"Nepta"});
+	rpc.execute("displaySum",{});
 	return EXIT_SUCCESS;
 }
