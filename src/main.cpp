@@ -9,9 +9,7 @@ int main(){
 	Mongo database;
 
 	database.displayMembers();
-	database.decUserBalance("Obsi", 1);
-	database.displayMembers();
-	database.incUserBalanceByOne("Obsi");
+	database.renameUser("Mute","Fira");
 	database.displayMembers();
 
 	return 0;

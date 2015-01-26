@@ -19,6 +19,7 @@ class Mongo{
 		void displayMembers();
 		void displaySum();
 		float getUserBalance(std::string pseudo);
+		bool hasMember(std::string pseudo);
 };
 
 #endif /* __mongo_H__ */

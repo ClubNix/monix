@@ -34,6 +34,10 @@ void Mongo::removeUser(std::string pseudo){
 }
 
 void Mongo::renameUser(std::string pseudo, std::string newPseudo){
+	if(!hasMember(pseudo)){
+		std::cout << "Error: member does not exist" << std::endl;
+		return;
+	}
 	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
 	std::string currentPseudo = "";
 	while(cursor->more()){
@@ -41,7 +45,7 @@ void Mongo::renameUser(std::string pseudo, std::string newPseudo){
 		currentPseudo = obj.getStringField("_id");
 		std::cout << currentPseudo << std::endl;
 		if(currentPseudo == newPseudo){
-			std::cout << "Error: The new pseudo already exists" << std::endl;
+			std::cout << "Error: new pseudo already exists" << std::endl;
 			return;
 		}
 	}
@@ -109,4 +113,15 @@ float Mongo::getUserBalance(std::string pseudo){
 	BSONObj obj = cursor->next();
 	float money = obj.getField("money").number();
 	return money;
+}
+
+bool Mongo::hasMember(std::string pseudo){
+	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
+	while(cursor->more()){
+		BSONObj obj = cursor->next();
+		if(obj.getStringField("_id") == pseudo){
+			return true;
+		}
+	}
+	return false;
 }
