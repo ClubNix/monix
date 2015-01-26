@@ -7,10 +7,12 @@
 #include "MongoWrapper.h"
 
 int main(){
-	//client::initialize();
 	Mongo database;
-	database.addUser("Nepta", 9);
-	
+
+	database.displayMembers();
+	database.renameUser("Mute","Fira");
+	database.displayMembers();
+
 	Socket socket;
 //	int end = socket.receive();
 //	while(!end){
