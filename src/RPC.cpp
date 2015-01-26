@@ -29,7 +29,7 @@ std::vector<std::string> RPC::split(std::string s, std::string delimiter){
 	return token;
 }
 
-void RPC::subscribleFunction(std::string functionName, RPC::wrappedFunction function){
+void RPC::subscribeFunction(std::string functionName, RPC::wrappedFunction function){
 	subscribedFunction_[functionName] = function;
 }
 

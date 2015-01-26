@@ -14,16 +14,16 @@ int main(){
 	database.displayMembers();
 
 	RPC rpc;
-	rpc.subscribleFunction("addUser",MongoWrapper::addUser);
-	rpc.subscribleFunction("removeUser",MongoWrapper::removeUser);
-	rpc.subscribleFunction("renameUser",MongoWrapper::renameUser);
-	rpc.subscribleFunction("setUserBalance",MongoWrapper::setUserBalance);
-	rpc.subscribleFunction("incUserBalance",MongoWrapper::incUserBalance);
-	rpc.subscribleFunction("decUserBalance",MongoWrapper::decUserBalance);
-	rpc.subscribleFunction("incUserBalanceByOne",MongoWrapper::incUserBalanceByOne);
-	rpc.subscribleFunction("decUserBalanceByOne",MongoWrapper::decUserBalanceByOne);
-	rpc.subscribleFunction("displayMembers",MongoWrapper::displayMembers);
-	rpc.subscribleFunction("displaySum",MongoWrapper::displaySum);
+	rpc.subscribeFunction("addUser",MongoWrapper::addUser);
+	rpc.subscribeFunction("removeUser",MongoWrapper::removeUser);
+	rpc.subscribeFunction("renameUser",MongoWrapper::renameUser);
+	rpc.subscribeFunction("setUserBalance",MongoWrapper::setUserBalance);
+	rpc.subscribeFunction("incUserBalance",MongoWrapper::incUserBalance);
+	rpc.subscribeFunction("decUserBalance",MongoWrapper::decUserBalance);
+	rpc.subscribeFunction("incUserBalanceByOne",MongoWrapper::incUserBalanceByOne);
+	rpc.subscribeFunction("decUserBalanceByOne",MongoWrapper::decUserBalanceByOne);
+	rpc.subscribeFunction("displayMembers",MongoWrapper::displayMembers);
+	rpc.subscribeFunction("displaySum",MongoWrapper::displaySum);
 
 	Socket socket;
 	int end = socket.receive();
