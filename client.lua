@@ -12,7 +12,9 @@ local socket,err = context:socket{zmq.PUSH, connect = "tcp://localhost:42923"}
 --	message = io.read()
 --	socket:send(message)
 --until message == "quit"
-
+if err then
+	print(err)
+end
 socket:send("addUser(Cirno,9)")
 socket:send("displayMembers()")
 socket:send("quit")
