@@ -11,6 +11,7 @@ public:
 	Socket();
 	int receive();
 	std::string message() const;
+	int operator>>(std::string& message);
 };
 
 #endif /* __socket_H__ */

@@ -17,3 +17,11 @@ std::string Socket::message() const{
 	return message_;
 }
 
+int Socket::operator>>(std::string& message){
+	zmq::message_t zmessage;
+	socket_.recv(&zmessage);
+	message = std::string(static_cast<char*>(zmessage.data()), zmessage.size());
+	return message == "quit";
+}
+
+
