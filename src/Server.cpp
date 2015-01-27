@@ -2,16 +2,12 @@
 #include <iostream>
 #include "MessageParser.h"
 #include "Socket.h"
-#include "mongo.h"
+#include "Mongo.h"
 #include "RPC.h"
 #include "MongoWrapper.h"
 
-int main(){
+int main(int argc, char* argv[]){
 	Mongo database;
-
-	database.displayMembers();
-	database.renameUser("Mute","Fira");
-	database.displayMembers();
 
 	RPC rpc;
 	rpc.subscribeFunction("addUser",MongoWrapper::addUser);
@@ -25,10 +21,11 @@ int main(){
 	rpc.subscribeFunction("displayMembers",MongoWrapper::displayMembers);
 	rpc.subscribeFunction("displaySum",MongoWrapper::displaySum);
 
-	Socket socket;
+	Socket socket(argv[0], ZMQ_PULL);
 	int end = socket.receive();
 	while(!end){
 		std::string message = socket.message();
+		std::cout << message << std::endl;
 		std::string functionName = rpc.getFunctionName(message);
 		std::vector<std::string> parameter = rpc.getParameter(message);
 		rpc.execute(functionName, parameter);
