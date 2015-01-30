@@ -20,16 +20,16 @@ ifndef AR
 endif
 
 ifeq ($(config),)
-  OBJDIR     = obj/monix
+  OBJDIR     = obj/server
   TARGETDIR  = .
-  TARGET     = $(TARGETDIR)/monix
+  TARGET     = $(TARGETDIR)/server
   DEFINES   += 
   INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11 -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
+  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq -lncurses
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -43,14 +43,14 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/MessageParser.o \
+	$(OBJDIR)/Server.o \
 	$(OBJDIR)/Action.o \
-	$(OBJDIR)/main.o \
 	$(OBJDIR)/Value.o \
 	$(OBJDIR)/RPC.o \
-	$(OBJDIR)/mongo.o \
 	$(OBJDIR)/Member.o \
 	$(OBJDIR)/MongoWrapper.o \
 	$(OBJDIR)/Parameter.o \
+	$(OBJDIR)/Mongo.o \
 	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
@@ -69,7 +69,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 	@:
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking monix
+	@echo Linking server
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -90,7 +90,7 @@ else
 endif
 
 clean:
-	@echo Cleaning monix
+	@echo Cleaning server
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -115,19 +115,16 @@ endif
 $(OBJDIR)/MessageParser.o: src/MessageParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Action.o: src/Action.cpp
+$(OBJDIR)/Server.o: src/Server.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/main.o: src/main.cpp
+$(OBJDIR)/Action.o: src/Action.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Value.o: src/Value.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/RPC.o: src/RPC.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/mongo.o: src/mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Member.o: src/Member.cpp
@@ -137,6 +134,9 @@ $(OBJDIR)/MongoWrapper.o: src/MongoWrapper.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Parameter.o: src/Parameter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Mongo.o: src/Mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Socket.o: src/Socket.cpp

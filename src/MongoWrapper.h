@@ -1,7 +1,7 @@
 #ifndef __MongoWrapper_H__
 #define __MongoWrapper_H__
 
-#include "mongo.h"
+#include "Mongo.h"
 
 class MongoWrapper : public Mongo{
 public:

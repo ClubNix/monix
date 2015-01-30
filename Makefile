@@ -6,18 +6,23 @@ ifndef config
 endif
 export config
 
-PROJECTS := monix
+PROJECTS := server client
 
 .PHONY: all clean help $(PROJECTS)
 
 all: $(PROJECTS)
 
-monix: 
-	@echo "==== Building monix ($(config)) ===="
-	@${MAKE} --no-print-directory -C . -f monix.make
+server: 
+	@echo "==== Building server ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f server.make
+
+client: 
+	@echo "==== Building client ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f client.make
 
 clean:
-	@${MAKE} --no-print-directory -C . -f monix.make clean
+	@${MAKE} --no-print-directory -C . -f server.make clean
+	@${MAKE} --no-print-directory -C . -f client.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -28,6 +33,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   monix"
+	@echo "   server"
+	@echo "   client"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

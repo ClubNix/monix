@@ -1,8 +1,13 @@
 #include "Socket.h"
 #include <iostream>
 
-Socket::Socket() : socket_(context_, ZMQ_PULL){
-	socket_.bind("tcp://*:42923");
+Socket::Socket(std::string role, int type) : socket_(context_, type){
+	if(role == "./server"){
+		socket_.bind("tcp://*:42923");
+	}
+	else{
+		socket_.connect("tcp://localhost:42923");
+	}
 }
 
 int Socket::receive(){
@@ -22,6 +27,13 @@ int Socket::operator>>(std::string& message){
 	socket_.recv(&zmessage);
 	message = std::string(static_cast<char*>(zmessage.data()), zmessage.size());
 	return message == "quit";
+}
+
+int Socket::send(std::string request){
+	zmq::message_t zmessage(request.length());
+	memcpy((void*)zmessage.data(), request.c_str(), request.length());
+	socket_.send(zmessage);
+	return 0;
 }
 
 

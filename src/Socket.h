@@ -8,8 +8,9 @@ class Socket{
 	zmq::socket_t socket_;
 	std::string message_;
 public:
-	Socket();
+	Socket(std::string role, int type);
 	int receive();
+	int send(std::string request);
 	std::string message() const;
 	int operator>>(std::string& message);
 };

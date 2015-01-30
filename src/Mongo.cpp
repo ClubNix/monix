@@ -4,7 +4,7 @@
 #include <string>
 #include "mongo/client/dbclient.h"
 
-#include "mongo.h"
+#include "Mongo.h"
 
 using namespace mongo;
 

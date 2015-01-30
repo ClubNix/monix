@@ -3,9 +3,13 @@
 #include "RPC.h"
 
 std::string RPC::getFunctionName(std::string functionString){
-	std::regex regexp("\\.?(\\w*?)\\(");
 	std::smatch match;
-	std::regex_search(functionString, match, regexp);
+	try{
+		std::regex regexp("\\.?(\\w*?)\\(");
+		std::regex_search(functionString, match, regexp);
+	}catch(std::regex_error& e){
+		std::cerr << "chat" << e.code() << std::endl;
+	}
 	return match[1];
 }
 
@@ -41,7 +45,7 @@ void RPC::execute(std::string functionName, std::vector<std::string> parameter){
 	if(isAnExistingFunction(functionName)){
 		subscribedFunction_[functionName](parameter);
 	}else{
-		std::cerr << functionName << " don't exist" << std::endl;
+		std::cerr << functionName << " doesn't exist" << std::endl;
 	}
 }
 
