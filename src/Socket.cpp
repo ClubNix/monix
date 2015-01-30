@@ -29,11 +29,10 @@ int Socket::operator>>(std::string& message){
 	return message == "quit";
 }
 
-int Socket::send(std::string request){
-	zmq::message_t zmessage(request.length());
-	memcpy((void*)zmessage.data(), request.c_str(), request.length());
+void Socket::operator<<(std::string& request){
+	zmq::message_t zmessage(request.size());
+	memcpy(zmessage.data(), request.data(), request.size());
 	socket_.send(zmessage);
-	return 0;
 }
 
 

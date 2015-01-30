@@ -10,9 +10,9 @@ class Socket{
 public:
 	Socket(std::string role, int type);
 	int receive();
-	int send(std::string request);
 	std::string message() const;
 	int operator>>(std::string& message);
+	void operator<<(std::string& request);
 };
 
 #endif /* __socket_H__ */
