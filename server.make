@@ -42,14 +42,9 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/MessageParser.o \
 	$(OBJDIR)/Server.o \
-	$(OBJDIR)/Action.o \
-	$(OBJDIR)/Value.o \
 	$(OBJDIR)/RPC.o \
-	$(OBJDIR)/Member.o \
 	$(OBJDIR)/MongoWrapper.o \
-	$(OBJDIR)/Parameter.o \
 	$(OBJDIR)/Mongo.o \
 	$(OBJDIR)/Socket.o \
 
@@ -112,28 +107,13 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/MessageParser.o: src/Server/MessageParser.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Server.o: src/Server/Server.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Action.o: src/Server/Action.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Value.o: src/Server/Value.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/RPC.o: src/Server/RPC.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Member.o: src/Server/Member.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MongoWrapper.o: src/Server/MongoWrapper.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Parameter.o: src/Server/Parameter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
