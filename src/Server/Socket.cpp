@@ -2,7 +2,7 @@
 #include <iostream>
 
 Socket::Socket(std::string role, int type) : socket_(context_, type){
-	if(role == "./server"){
+	if(role == "server"){
 		socket_.bind("tcp://*:42923");
 	}
 	else{
@@ -29,7 +29,7 @@ int Socket::operator>>(std::string& message){
 	return message == "quit";
 }
 
-void Socket::operator<<(std::string& request){
+void Socket::operator<<(std::string request){
 	zmq::message_t zmessage(request.size());
 	memcpy(zmessage.data(), request.data(), request.size());
 	socket_.send(zmessage);

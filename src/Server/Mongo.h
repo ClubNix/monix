@@ -1,7 +1,7 @@
 #ifndef __mongo_H__
 #define __mongo_H__
 #include <string>
-#include "mongo/client/dbclient.h"
+#include <mongo/client/dbclient.h>
 
 class Mongo{
 	private:

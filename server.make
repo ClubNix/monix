@@ -24,12 +24,12 @@ ifeq ($(config),)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/server
   DEFINES   += 
-  INCLUDES  += -Isrc
+  INCLUDES  += -Isrc/Server -Iincludes
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11 -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq -lncurses
+  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -112,34 +112,34 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/MessageParser.o: src/MessageParser.cpp
+$(OBJDIR)/MessageParser.o: src/Server/MessageParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Server.o: src/Server.cpp
+$(OBJDIR)/Server.o: src/Server/Server.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Action.o: src/Action.cpp
+$(OBJDIR)/Action.o: src/Server/Action.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Value.o: src/Value.cpp
+$(OBJDIR)/Value.o: src/Server/Value.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/RPC.o: src/RPC.cpp
+$(OBJDIR)/RPC.o: src/Server/RPC.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Member.o: src/Member.cpp
+$(OBJDIR)/Member.o: src/Server/Member.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/MongoWrapper.o: src/MongoWrapper.cpp
+$(OBJDIR)/MongoWrapper.o: src/Server/MongoWrapper.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Parameter.o: src/Parameter.cpp
+$(OBJDIR)/Parameter.o: src/Server/Parameter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Mongo.o: src/Mongo.cpp
+$(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Socket.o: src/Socket.cpp
+$(OBJDIR)/Socket.o: src/Server/Socket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

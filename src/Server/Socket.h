@@ -12,7 +12,7 @@ public:
 	int receive();
 	std::string message() const;
 	int operator>>(std::string& message);
-	void operator<<(std::string& request);
+	void operator<<(std::string request);
 };
 
 #endif /* __socket_H__ */

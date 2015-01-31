@@ -3,12 +3,11 @@ solution "Monix"
    project "server"
       kind "ConsoleApp"
       language "C++"
-      files({ "src/*.h", "src/*.cpp" })
-      excludes({"src/mongo/", "src/Client.cpp"})
-      includedirs({"src/"})
+      files({ "src/Server/*.h", "src/Server/*.cpp" })
+      includedirs({"src/Server/", "includes"})
       
       flags({"Symbols", "ExtraWarnings", })
-      links({"mongoclient", "boost_thread-mt", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq", "ncurses"})
+      links({"mongoclient", "boost_thread-mt", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq"})
       libdirs({"Driver/"})
       
       buildoptions({"-std=c++11"})
@@ -17,13 +16,15 @@ solution "Monix"
    project "client"
       kind "ConsoleApp"
       language "C++"
-      files({ "src/*.h", "src/*.cpp" })
-      excludes({"src/mongo/", "src/Server.cpp"})
-      includedirs({"src/"})
+      files{
+      	"src/Client/*.h",
+      	"src/Client/*.cpp",
+      	"src/Server/Socket.cpp"
+      }
+      includedirs({"src/Client/"})
       
       flags({"Symbols", "ExtraWarnings", })
-      links({"mongoclient", "boost_thread-mt", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq", "ncurses"})
-      libdirs({"Driver/"})
+      links({"zmq", "ncurses"})
       
       buildoptions({"-std=c++11"})
       linkoptions({"-std=c++11"})

@@ -24,12 +24,12 @@ ifeq ($(config),)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/client
   DEFINES   += 
-  INCLUDES  += -Isrc
+  INCLUDES  += -Isrc/Client
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -std=c++11 -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq -lncurses
+  LDFLAGS   += -std=c++11
+  LIBS      += -lzmq -lncurses
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -43,14 +43,6 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/Client.o \
-	$(OBJDIR)/MessageParser.o \
-	$(OBJDIR)/Action.o \
-	$(OBJDIR)/Value.o \
-	$(OBJDIR)/RPC.o \
-	$(OBJDIR)/Member.o \
-	$(OBJDIR)/MongoWrapper.o \
-	$(OBJDIR)/Parameter.o \
-	$(OBJDIR)/Mongo.o \
 	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
@@ -112,34 +104,10 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/Client.o: src/Client.cpp
+$(OBJDIR)/Client.o: src/Client/Client.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/MessageParser.o: src/MessageParser.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Action.o: src/Action.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Value.o: src/Value.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/RPC.o: src/RPC.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Member.o: src/Member.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/MongoWrapper.o: src/MongoWrapper.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Parameter.o: src/Parameter.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Mongo.o: src/Mongo.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Socket.o: src/Socket.cpp
+$(OBJDIR)/Socket.o: src/Server/Socket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
