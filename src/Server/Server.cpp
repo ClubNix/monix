@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
 		std::vector<std::string> parameter = rpc.getParameter(message);
 		std::string result = rpc.execute(functionName, parameter);
 		if(result != ""){
-			std::cout << result << std::endl;
+			socket << result;
 		}
 		end = socket >> message;
 	}
