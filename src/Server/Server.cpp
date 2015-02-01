@@ -16,6 +16,7 @@ int main(int argc, char* argv[]){
 	rpc.subscribeFunction("decUserBalanceByOne",MongoWrapper::decUserBalanceByOne);
 	rpc.subscribeFunction("displayMembers",MongoWrapper::displayMembers);
 	rpc.subscribeFunction("displaySum",MongoWrapper::displaySum);
+	rpc.subscribeFunction("getUserBalance",MongoWrapper::getUserBalance);
 
 	Socket socket("server", ZMQ_PULL);
 	std::string message;
@@ -23,9 +24,11 @@ int main(int argc, char* argv[]){
 	while(!end){
 		std::string functionName = rpc.getFunctionName(message);
 		std::vector<std::string> parameter = rpc.getParameter(message);
-		rpc.execute(functionName, parameter);
+		std::string result = rpc.execute(functionName, parameter);
+		if(result != ""){
+			std::cout << result << std::endl;
+		}
 		end = socket >> message;
 	}
-	std::cout << MongoWrapper::getUserBalance({"Cirno"}) << std::endl;
 	return EXIT_SUCCESS;
 }
