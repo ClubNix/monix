@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "../Server/Socket.h"
+#include <ncurses.h>
 
 int main(int argc, char* argv[]){
 	Socket socket("client");
@@ -9,7 +10,13 @@ int main(int argc, char* argv[]){
 	socket << std::string("getUserBalance(Flandre)");
 	std::string response;
 	socket >> response;
-	std::cout << response << std::endl;
+
+	initscr();
+	printw(response.c_str());
+	refresh();
+	getch();
+	endwin();
+	
 	socket << std::string("quit");
 	return EXIT_SUCCESS;
 }
