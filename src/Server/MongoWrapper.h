@@ -17,7 +17,7 @@ public:
 	static void displayMembers(std::vector<std::string> parameter);
 	static void displaySum(std::vector<std::string> parameter);
 	
-//	static float getUserBalance(std::string pseudo);
+	static std::string getUserBalance(std::vector<std::string> parameter);
 //	static bool hasMember(std::string pseudo);
 };
 

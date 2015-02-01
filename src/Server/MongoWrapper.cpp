@@ -58,3 +58,8 @@ void MongoWrapper::displaySum(std::vector<std::string> parameter){
 	database().displaySum();
 }
 
+std::string MongoWrapper::getUserBalance(std::vector<std::string> parameter){
+	float money = database().getUserBalance(parameter[0]);
+	return std::to_string(money);
+}
+

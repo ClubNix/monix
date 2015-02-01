@@ -26,6 +26,6 @@ int main(int argc, char* argv[]){
 		rpc.execute(functionName, parameter);
 		end = socket >> message;
 	}
-	
+	std::cout << MongoWrapper::getUserBalance({"Cirno"}) << std::endl;
 	return EXIT_SUCCESS;
 }
