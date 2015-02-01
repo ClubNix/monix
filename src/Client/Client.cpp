@@ -12,7 +12,11 @@ int main(int argc, char* argv[]){
 	socket >> response;
 
 	initscr();
-	printw(response.c_str());
+	raw();
+	keypad(stdscr, TRUE);
+	noecho();
+	box(stdscr,0,0);
+	mvprintw(LINES/2, COLS/2, response.c_str());
 	refresh();
 	getch();
 	endwin();
