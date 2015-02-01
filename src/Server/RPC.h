@@ -5,7 +5,7 @@
 
 
 class RPC{
-	typedef void (*wrappedFunction)(std::vector<std::string>);
+	typedef std::string (*wrappedFunction)(std::vector<std::string>);
 	std::unordered_map<std::string, wrappedFunction> subscribedFunction_;
 
 public:
