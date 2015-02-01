@@ -41,11 +41,12 @@ bool RPC::isAnExistingFunction(std::string functionName){
 	return subscribedFunction_.count(functionName) > 0;
 }
 
-void RPC::execute(std::string functionName, std::vector<std::string> parameter){
+std::string RPC::execute(std::string functionName, std::vector<std::string> parameter){
 	if(isAnExistingFunction(functionName)){
-		subscribedFunction_[functionName](parameter);
+		return subscribedFunction_[functionName](parameter);
 	}else{
 		std::cerr << functionName << " doesn't exist" << std::endl;
+		return "";
 	}
 }
 

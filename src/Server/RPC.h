@@ -14,7 +14,7 @@ public:
 	std::vector<std::string> split(std::string s, std::string delimiter);
 	void subscribeFunction(std::string functionName, wrappedFunction function);
 	bool isAnExistingFunction(std::string functionName);
-	void execute(std::string functionName, std::vector<std::string> parameter);
+	std::string execute(std::string functionName, std::vector<std::string> parameter);
 };
 
 #endif /* __rpc_H__ */
