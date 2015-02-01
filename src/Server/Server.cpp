@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
 	rpc.subscribeFunction("displaySum",MongoWrapper::displaySum);
 	rpc.subscribeFunction("getUserBalance",MongoWrapper::getUserBalance);
 
-	Socket socket("server", ZMQ_PULL);
+	Socket socket("server");
 	std::string message;
 	int end = socket >> message;
 	while(!end){
