@@ -16,8 +16,9 @@ int main(int argc, char* argv[]){
 	keypad(stdscr, TRUE);
 	noecho();
 	start_color();
-	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	use_default_colors();
+	init_pair(1, COLOR_RED, -1);
+	init_pair(2, COLOR_GREEN, -1);
 	
 	attron(COLOR_PAIR(1));
 	box(stdscr,0,0);
