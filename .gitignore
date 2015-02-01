@@ -4,3 +4,4 @@ monix
 server
 client
 obj/
+!includes/mongo/client/
