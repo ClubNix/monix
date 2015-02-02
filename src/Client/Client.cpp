@@ -1,8 +1,9 @@
 #include <string>
 #include <iostream>
+#include <ncurses.h>
 #include "../Server/Socket.h"
 #include "Gui.h"
-#include <menu.h>
+
 
 int main(int argc, char* argv[]){
 //	Socket socket("client");
@@ -14,8 +15,8 @@ int main(int argc, char* argv[]){
 	std::string response = "Flandre : 18";
 	Gui gui;
 	
-	gui.mvprintw(LINES/2, COLS/2, response.c_str());
-	
+	gui.mvprintw(LINES/2, COLS/3, response.c_str());
+	gui.createDummyMenu(LINES/2, 2*COLS/3);
 	int ch;
 	gui >> ch;
 	

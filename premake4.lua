@@ -24,7 +24,7 @@ solution "Monix"
       includedirs({"src/Client/"})
       
       flags({"Symbols", "ExtraWarnings", })
-      links({"zmq", "ncurses"})
+      links({"zmq", "ncurses", "menu"})
       
       buildoptions({"-std=c++11"})
       linkoptions({"-std=c++11"})
