@@ -1,7 +1,8 @@
 #include <string>
 #include <iostream>
 #include "../Server/Socket.h"
-#include <ncurses.h>
+#include "Gui.h"
+#include <menu.h>
 
 int main(int argc, char* argv[]){
 	Socket socket("client");
@@ -11,24 +12,12 @@ int main(int argc, char* argv[]){
 	std::string response;
 	socket >> response;
 
-	initscr();
-	raw();
-	keypad(stdscr, TRUE);
-	noecho();
-	start_color();
-	use_default_colors();
-	init_pair(1, COLOR_RED, -1);
-	init_pair(2, COLOR_GREEN, -1);
+	Gui gui;
 	
-	attron(COLOR_PAIR(1));
-	box(stdscr,0,0);
-	attroff(COLOR_PAIR(1));
-	attron(COLOR_PAIR(2));
-	mvprintw(LINES/2, COLS/2, response.c_str());
-	attroff(COLOR_PAIR(2));
-	refresh();
-	getch();
-	endwin();
+	gui.mvprintw(LINES/2, COLS/2, response.c_str());
+	
+	int ch;
+	gui >> ch;
 	
 	socket << std::string("quit");
 	return EXIT_SUCCESS;
