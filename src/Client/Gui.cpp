@@ -30,17 +30,6 @@ void Gui::operator>>(int &ch){
 	ch = getch();
 }
 
-void Gui::createDummyMenu(int y, int x){
-	const int MAX = 2;
-	ITEM **items = (ITEM**)calloc(MAX+1,sizeof (ITEM*));
-	items[0] = new_item("Cirno","ice fairy");
-	items[1] = new_item("Suwako","frog");
-	items[MAX] = NULL;
-	MENU *menu = new_menu(items);
-	post_menu(menu);
-	// !!! attention you must free in non dummy code
-}
-
 Gui::~Gui(){
 	endwin();
 }

@@ -3,6 +3,8 @@
 #include <ncurses.h>
 #include "../Server/Socket.h"
 #include "Gui.h"
+#include "GuiMenu.h"
+
 
 
 int main(int argc, char* argv[]){
@@ -16,10 +18,17 @@ int main(int argc, char* argv[]){
 	Gui gui;
 	
 	gui.mvprintw(LINES/2, COLS/3, response.c_str());
-	gui.createDummyMenu(LINES/2, 2*COLS/3);
+
+
+	GuiMenu menu;
+	menu.addItem("Cirno","ice fairy");
+	menu.addItem("Suwako","frog");
+	menu.createMenu();
+
 	int ch;
 	gui >> ch;
-	
+	menu.down();
+	gui >> ch;
 //	socket << std::string("quit");
 	return EXIT_SUCCESS;
 }

@@ -44,6 +44,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/Client.o \
 	$(OBJDIR)/Gui.o \
+	$(OBJDIR)/GuiMenu.o \
 	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
@@ -109,6 +110,9 @@ $(OBJDIR)/Client.o: src/Client/Client.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Gui.o: src/Client/Gui.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/GuiMenu.o: src/Client/GuiMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Socket.o: src/Server/Socket.cpp

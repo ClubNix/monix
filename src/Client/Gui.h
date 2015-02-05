@@ -13,7 +13,6 @@ public:
 	Gui();
 	void mvprintw(int y, int x, std::string message, int color = GREEN);
 	void operator>>(int &ch);
-	void createDummyMenu(int y, int x);
 	~Gui();
 };
 
