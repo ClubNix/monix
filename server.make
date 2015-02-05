@@ -26,7 +26,7 @@ ifeq ($(config),)
   DEFINES   += 
   INCLUDES  += -Isrc/Server -Iincludes
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11 -Wno-deprecated-declarations -Wno-undefined-bool-conversion
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11 -LDriver
   LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq

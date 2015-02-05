@@ -10,7 +10,10 @@ solution "Monix"
       links({"mongoclient", "boost_thread-mt", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq"})
       libdirs({"Driver/"})
       
-      buildoptions({"-std=c++11"})
+      buildoptions({"-std=c++11",
+		    "-Wno-deprecated-declarations",
+		    "-Wno-undefined-bool-conversion"
+      })
       linkoptions({"-std=c++11"})
 
    project "client"
