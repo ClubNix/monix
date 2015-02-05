@@ -89,12 +89,14 @@ void Mongo::decUserBalanceByOne(std::string pseudo){
 	decUserBalance(pseudo, 1);
 }
 
-void Mongo::displayMembers(){
+std::string Mongo::displayMembers(){
 	auto_ptr<DBClientCursor> cursor = connection_->query(dbName_, BSONObj());
+	std::string response;
 	while(cursor->more()){
 		BSONObj p = cursor->next();
-		std::cout << p.toString() << std::endl;
+		response += p.toString() += '\n';
 	}
+	return response;
 }
 
 void Mongo::displaySum(){

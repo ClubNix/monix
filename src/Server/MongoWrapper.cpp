@@ -59,8 +59,8 @@ std::string MongoWrapper::decUserBalanceByOne(std::vector<std::string> parameter
 }
 
 std::string MongoWrapper::displayMembers(std::vector<std::string> parameter){
-	database().displayMembers();
-	return "";
+	std::string response = database().displayMembers();
+	return response;
 }
 
 std::string MongoWrapper::displaySum(std::vector<std::string> parameter){

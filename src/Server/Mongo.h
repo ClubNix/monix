@@ -18,7 +18,7 @@ class Mongo{
 		void incUserBalanceByOne(std::string pseudo);
 		void decUserBalance(std::string pseudo, float money);
 		void decUserBalanceByOne(std::string pseudo);
-		void displayMembers();
+		std::string displayMembers();
 		void displaySum();
 		float getUserBalance(std::string pseudo);
 		bool hasMember(std::string pseudo);
