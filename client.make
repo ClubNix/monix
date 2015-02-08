@@ -44,6 +44,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/Client.o \
 	$(OBJDIR)/Gui.o \
+	$(OBJDIR)/ClientParser.o \
 	$(OBJDIR)/GuiMenu.o \
 	$(OBJDIR)/Socket.o \
 
@@ -110,6 +111,9 @@ $(OBJDIR)/Client.o: src/Client/Client.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Gui.o: src/Client/Gui.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ClientParser.o: src/Client/ClientParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GuiMenu.o: src/Client/GuiMenu.cpp

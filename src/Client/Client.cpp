@@ -4,8 +4,7 @@
 #include "../Server/Socket.h"
 #include "Gui.h"
 #include "GuiMenu.h"
-
-
+#include "ClientParser.h"
 
 int main(int argc, char* argv[]){
 	Socket socket("client");
@@ -14,22 +13,22 @@ int main(int argc, char* argv[]){
 //	socket << std::string("getUserBalance(Flandre)");
 	std::string response;
 	socket >> response;
-	std::cout << response;
 //	std::string response = "Flandre : 18";
-//	Gui gui;
-//	
-//	gui.mvprintw(LINES/2, COLS/3, response.c_str());
+	Gui gui;
+	
+	gui.mvprintw(LINES/2, COLS/3, response.c_str());
 
+	ClientParser parser;
+	parser.parse(response);
+	GuiMenu menu;
+	menu.addItem("Cirno","ice fairy");
+	menu.addItem("Suwako","frog");
+	menu.createMenu();
 
-//	GuiMenu menu;
-//	menu.addItem("Cirno","ice fairy");
-//	menu.addItem("Suwako","frog");
-//	menu.createMenu();
-
-//	int ch;
-//	gui >> ch;
-//	menu.down();
-//	gui >> ch;
-	socket << std::string("quit");
+	int ch;
+	gui >> ch;
+	menu.down();
+	gui >> ch;
+//	socket << std::string("quit");
 	return EXIT_SUCCESS;
 }

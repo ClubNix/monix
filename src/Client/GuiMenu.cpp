@@ -8,7 +8,7 @@ void GuiMenu::addItem(const char* name, const char* description){
 }
 
 GuiMenu::~GuiMenu(){
-	for(int i=0; i<item_.size()-1; i++){
+	for(unsigned i=0; i<item_.size()-1; i++){
 		free_item(item_[i]);
 	}
 	free_menu(menu_);

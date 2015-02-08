@@ -15,6 +15,5 @@ local socket,err = context:socket{zmq.PUSH, connect = "tcp://localhost:42923"}
 if err then
 	print(err)
 end
-socket:send("addUser(Cirno,9)")
-socket:send("displayMembers()")
-socket:send("quit")
+socket:send("addUser(Flandre,42)")
+--socket:send("quit")
