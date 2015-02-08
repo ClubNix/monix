@@ -18,11 +18,11 @@ int main(int argc, char* argv[]){
 	
 	gui.mvprintw(LINES/2, COLS/3, response.c_str());
 
-	ClientParser parser;
-	parser.parse(response);
+	ClientParser::NameMoneyList userList = ClientParser::parse(response);
 	GuiMenu menu;
-	menu.addItem("Cirno","ice fairy");
-	menu.addItem("Suwako","frog");
+	for(auto user : userList){
+		menu.addItem(user.first.c_str(), user.second.c_str());
+	}
 	menu.createMenu();
 
 	int ch;
