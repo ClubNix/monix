@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
 	Gui gui;
 	
 //	gui.mvprintw(LINES/2, COLS/3, response.c_str());
-
+	gui.debugPrint("miaou");
 	ClientParser::NameMoneyList userList = ClientParser::parse(response);
 	GuiMenu menu(LINES, COLS/2);
 	for(auto user : userList){
