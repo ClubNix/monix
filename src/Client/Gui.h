@@ -2,8 +2,9 @@
 #define __Gui_H__
 
 #include <string>
+#include "Window.h"
 
-class Gui{
+class Gui : public Window{
 public:
 	enum{
 		RED = 1,

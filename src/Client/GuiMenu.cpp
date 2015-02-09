@@ -4,8 +4,8 @@
 #include "GuiMenu.h"
 #include "Gui.h"
 
-GuiMenu::GuiMenu(int rows, int cols, WINDOW *parent) : rows_(rows), cols_(cols){
-	menuWindows_ = derwin(parent, rows_-2, cols_-3, 1, 1);
+GuiMenu::GuiMenu(Window& parent, int rows, int cols) : rows_(rows), cols_(cols){
+	window(derwin(parent.window(), rows_-2, cols_-3, 1, 1));
 }
 
 void GuiMenu::addItem(const char* name, const char* description){
@@ -22,14 +22,13 @@ GuiMenu::~GuiMenu(){
 void GuiMenu::createMenu(){
 	item_.push_back(NULL);
 	menu_ = new_menu(item_.data());
-	set_menu_win(menu_, menuWindows_);
-	set_menu_sub(menu_, derwin(menuWindows_, 0, 0, 1, 1));
-//	set_menu_format(menu_, rows_, cols_);
+	set_menu_win(menu_, window());
+	set_menu_sub(menu_, derwin(window(), 0, 0, 1, 1));
 	attron(COLOR_PAIR(Gui::GREEN));
-	box(menuWindows_, 0, 0);
+	box(window(), 0, 0);
 	attroff(COLOR_PAIR(Gui::GREEN));
 	post_menu(menu_);
-	wrefresh(menuWindows_);
+	wrefresh(window());
 }
 
 void GuiMenu::up() const{
@@ -39,4 +38,5 @@ void GuiMenu::up() const{
 void GuiMenu::down() const{
 	menu_driver(menu_, REQ_DOWN_ITEM);
 }
+
 

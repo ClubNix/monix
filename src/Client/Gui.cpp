@@ -3,7 +3,7 @@
 #include <menu.h>
 #include <iostream>
 
-Gui::Gui(){
+Gui::Gui() : Window(stdscr){
 	initscr();
 	raw();
 	keypad(stdscr, TRUE);

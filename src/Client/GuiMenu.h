@@ -2,17 +2,17 @@
 #define __GuiMenu_H__
 #include <menu.h>
 #include <vector>
+#include "Window.h"
 
-class GuiMenu{
+class GuiMenu : public Window{
 	std::vector<ITEM*> item_;
 	MENU *menu_;
 	WINDOW *menuWindows_;
 	int rows_;
 	int cols_;
 	
-	
 public:
-	GuiMenu(int rows, int cols, WINDOW *parent=stdscr);
+	GuiMenu(Window& parent, int rows, int cols);
 	void addItem(const char* name, const char* description);
 	void createMenu();
 	void up() const;
