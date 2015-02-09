@@ -4,8 +4,8 @@
 #include "GuiMenu.h"
 #include "Gui.h"
 
-GuiMenu::GuiMenu(Window& parent, int rows, int cols) : rows_(rows), cols_(cols){
-	window(derwin(parent.window(), rows_-2, cols_-3, 1, 1));
+GuiMenu::GuiMenu(Window *parent, int rows, int cols) : Window(parent), rows_(rows), cols_(cols){
+	window(derwin(parent->window(), rows_-2, cols_-3, 1, 1));
 }
 
 void GuiMenu::addItem(const char* name, const char* description){

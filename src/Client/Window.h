@@ -5,9 +5,9 @@
 
 class Window{
 	WINDOW *window_;
-
+	Window *parent_;
 public:
-	Window(WINDOW *window=stdscr) : window_(window){}
+	Window(Window *parent=nullptr) : parent_(parent){}
 	
 	WINDOW* window(){
 		return window_;
@@ -15,6 +15,10 @@ public:
 	
 	void window(WINDOW *window){
 		window_ = window;
+	}
+	
+	Window* parent(){
+		return parent_;
 	}
 };
 

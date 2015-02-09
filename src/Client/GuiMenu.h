@@ -11,7 +11,7 @@ class GuiMenu : public Window{
 	int cols_;
 	
 public:
-	GuiMenu(Window& parent, int rows, int cols);
+	GuiMenu(Window *parent, int rows, int cols);
 	void addItem(const char* name, const char* description);
 	void createMenu();
 	void up() const;

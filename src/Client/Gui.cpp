@@ -3,10 +3,11 @@
 #include <menu.h>
 #include <iostream>
 
-Gui::Gui() : Window(stdscr){
+Gui::Gui(){
 	initscr();
+	window(stdscr);
 	raw();
-	keypad(stdscr, TRUE);
+	keypad(window(), TRUE);
 	noecho();
 	start_color();
 	use_default_colors();
@@ -14,7 +15,7 @@ Gui::Gui() : Window(stdscr){
 	init_pair(Gui::GREEN, COLOR_GREEN, -1);
 	
 	attron(COLOR_PAIR(RED));
-	box(stdscr,0,0);
+	box(window(),0,0);
 	attroff(COLOR_PAIR(RED));
 }
 
