@@ -27,6 +27,7 @@ void Gui::mvprintw(int y, int x, std::string message, int color){
 }
 
 void Gui::debugPrint(std::string message){
+	mvprintw(LINES-1, 1, "                                                                                    ");
 	mvprintw(LINES-1, 1, message);
 	refresh();
 }
