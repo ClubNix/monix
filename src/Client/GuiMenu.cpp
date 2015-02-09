@@ -33,7 +33,7 @@ void GuiMenu::createMenu(){
 }
 
 void GuiMenu::up() const{
-	menu_driver(menu_, REQ_DOWN_ITEM);
+	menu_driver(menu_, REQ_UP_ITEM);
 }
 
 void GuiMenu::down() const{
