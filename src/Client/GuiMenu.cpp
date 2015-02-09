@@ -39,4 +39,11 @@ void GuiMenu::down() const{
 	menu_driver(menu_, REQ_DOWN_ITEM);
 }
 
+GuiMenu& GuiMenu::operator--(int){
+	return (*this);
+}
+
+GuiMenu& GuiMenu::operator++(int){
+	return (*this);
+}
 

@@ -7,7 +7,6 @@
 class GuiMenu : public Window{
 	std::vector<ITEM*> item_;
 	MENU *menu_;
-	WINDOW *menuWindows_;
 	int rows_;
 	int cols_;
 	
@@ -17,6 +16,8 @@ public:
 	void createMenu();
 	void up() const;
 	void down() const;
+	GuiMenu& operator--(int);
+	GuiMenu& operator++(int);
 	virtual ~GuiMenu();
 };
 
