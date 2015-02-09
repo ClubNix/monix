@@ -40,10 +40,18 @@ void GuiMenu::down() const{
 }
 
 GuiMenu& GuiMenu::operator--(int){
+	Gui& gui = dynamic_cast<Gui&>(*parent());
+	ITEM *item = current_item(menu_);
+	std::string pseudo(item_name(item));
+	gui.debugPrint(pseudo + "--");
 	return (*this);
 }
 
 GuiMenu& GuiMenu::operator++(int){
+	Gui& gui = dynamic_cast<Gui&>(*parent());
+	ITEM *item = current_item(menu_);
+	std::string pseudo(item_name(item));
+	gui.debugPrint(pseudo + "++");
 	return (*this);
 }
 

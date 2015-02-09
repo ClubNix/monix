@@ -20,6 +20,7 @@ public:
 	Window* parent(){
 		return parent_;
 	}
+	virtual ~Window(){}
 };
 
 #endif /* __Window_H__ */

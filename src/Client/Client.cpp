@@ -36,7 +36,14 @@ int main(int argc, char* argv[]){
 			case KEY_UP:
 				menu.up();
 				break;
-			
+			case '+':
+				menu++;
+				break;
+				
+			case '-':
+				menu--;
+				break;
+				
 			default:
 				gui.debugPrint(std::to_string(ch));
 				break;
