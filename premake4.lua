@@ -22,7 +22,6 @@ solution "Monix"
       files{
       	"src/Client/*.h",
       	"src/Client/*.cpp",
-      	"src/Server/Socket.cpp"
       }
       includedirs({"src/Client/"})
       

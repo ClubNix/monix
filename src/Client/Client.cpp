@@ -1,13 +1,13 @@
 #include <string>
 #include <iostream>
 #include <ncurses.h>
-#include "../Server/Socket.h"
+#include "ClientSocket.h"
 #include "Gui.h"
 #include "GuiMenu.h"
 #include "ClientParser.h"
 
 int main(int argc, char* argv[]){
-	Socket socket("client");
+	ClientSocket socket;
 //	socket << std::string("addUser(Flandre,18)");
 	socket << std::string("displayMembers()");
 //	socket << std::string("getUserBalance(Flandre)");

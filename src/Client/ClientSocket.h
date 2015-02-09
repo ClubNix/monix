@@ -1,19 +1,19 @@
-#ifndef __socket_H__
-#define __socket_H__
+#ifndef __ClientSocket_H__
+#define __ClientSocket_H__
 
 #include <zmq.hpp>
 
-class Socket{
+class ClientSocket{
 	zmq::context_t context_;
 	zmq::socket_t pushSocket_;
 	zmq::socket_t pullSocket_;
 	std::string message_;
 public:
-	Socket(std::string role);
+	ClientSocket();
 	std::string message() const;
 	int operator>>(std::string& message);
 	void operator<<(std::string request);
 };
 
-#endif /* __socket_H__ */
+#endif /* __ClientSocket_H__ */
 

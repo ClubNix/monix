@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Socket.h"
+#include "ServerSocket.h"
 #include "Mongo.h"
 #include "RPC.h"
 #include "MongoWrapper.h"
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
 	rpc.subscribeFunction("displaySum",MongoWrapper::displaySum);
 	rpc.subscribeFunction("getUserBalance",MongoWrapper::getUserBalance);
 
-	Socket socket("server");
+	ServerSocket socket;
 	std::string message;
 	int end = socket >> message;
 	while(!end){

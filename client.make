@@ -42,11 +42,11 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/Client.o \
 	$(OBJDIR)/Gui.o \
+	$(OBJDIR)/ClientSocket.o \
 	$(OBJDIR)/ClientParser.o \
+	$(OBJDIR)/Client.o \
 	$(OBJDIR)/GuiMenu.o \
-	$(OBJDIR)/Socket.o \
 
 RESOURCES := \
 
@@ -107,19 +107,19 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/Client.o: src/Client/Client.cpp
+$(OBJDIR)/Gui.o: src/Client/Gui.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Gui.o: src/Client/Gui.cpp
+$(OBJDIR)/ClientSocket.o: src/Client/ClientSocket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ClientParser.o: src/Client/ClientParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/GuiMenu.o: src/Client/GuiMenu.cpp
+$(OBJDIR)/Client.o: src/Client/Client.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Socket.o: src/Server/Socket.cpp
+$(OBJDIR)/GuiMenu.o: src/Client/GuiMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
