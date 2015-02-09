@@ -21,10 +21,16 @@ Gui::Gui(){
 
 void Gui::mvprintw(int y, int x, std::string message, int color){
 	attron(COLOR_PAIR(color));
-	::mvprintw(LINES/2, COLS/2, message.c_str());
+	::mvprintw(y, x, message.c_str());
 	attroff(COLOR_PAIR(color));
 	refresh();
 }
+
+void Gui::debugPrint(std::string message){
+	mvprintw(LINES-1, 1, message);
+	refresh();
+}
+
 
 void Gui::operator>>(int &ch){
 	ch = getch();
@@ -33,3 +39,5 @@ void Gui::operator>>(int &ch){
 Gui::~Gui(){
 	endwin();
 }
+
+

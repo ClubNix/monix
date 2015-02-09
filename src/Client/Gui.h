@@ -4,15 +4,17 @@
 #include <string>
 
 class Gui{
-enum{
-	RED = 1,
-	GREEN
-};
+public:
+	enum{
+		RED = 1,
+		GREEN
+	};
 
 public:
 	Gui();
 	void mvprintw(int y, int x, std::string message, int color = GREEN);
 	void operator>>(int &ch);
+	void debugPrint(std::string message);
 	~Gui();
 };
 
