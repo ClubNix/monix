@@ -16,10 +16,10 @@ int main(int argc, char* argv[]){
 //	std::string response = "Flandre : 18";
 	Gui gui;
 	
-	gui.mvprintw(LINES/2, COLS/3, response.c_str());
+//	gui.mvprintw(LINES/2, COLS/3, response.c_str());
 
 	ClientParser::NameMoneyList userList = ClientParser::parse(response);
-	GuiMenu menu;
+	GuiMenu menu(LINES, COLS/2);
 	for(auto user : userList){
 		menu.addItem(user.first.c_str(), user.second.c_str());
 	}

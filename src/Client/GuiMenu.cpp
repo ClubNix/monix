@@ -3,6 +3,10 @@
 #include <string>
 #include "GuiMenu.h"
 
+GuiMenu::GuiMenu(int rows, int cols, WINDOW *parent) : rows_(rows), cols_(cols){
+	menuWindows_ = derwin(parent, rows_-2, cols_-3, 1, 1);
+}
+
 void GuiMenu::addItem(const char* name, const char* description){
 	item_.push_back(new_item(name, description));
 }
@@ -17,7 +21,12 @@ GuiMenu::~GuiMenu(){
 void GuiMenu::createMenu(){
 	item_.push_back(NULL);
 	menu_ = new_menu(item_.data());
+	set_menu_win(menu_, menuWindows_);
+	set_menu_sub(menu_, derwin(menuWindows_, 0, 0, 1, 1));
+	set_menu_format(menu_, rows_, cols_);
+	box(menuWindows_, 0, 0);
 	post_menu(menu_);
+	wrefresh(menuWindows_);
 }
 
 void GuiMenu::up() const{
