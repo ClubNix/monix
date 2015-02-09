@@ -26,9 +26,22 @@ int main(int argc, char* argv[]){
 	menu.createMenu();
 
 	int ch;
-	gui >> ch;
-	menu.down();
-	gui >> ch;
+	do{
+		gui >> ch;
+		switch(ch){
+			case KEY_DOWN:
+				menu.down();
+				break;
+			
+			case KEY_UP:
+				menu.up();
+				break;
+			
+			default:
+				gui.debugPrint(std::to_string(ch));
+				break;
+		}
+	}while(ch != 'q');
 //	socket << std::string("quit");
 	return EXIT_SUCCESS;
 }
