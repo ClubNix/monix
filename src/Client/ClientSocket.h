@@ -7,6 +7,7 @@ class ClientSocket{
 	zmq::context_t context_;
 	zmq::socket_t pushSocket_;
 	zmq::socket_t pullSocket_;
+	zmq::socket_t pubSocket_;
 	std::string message_;
 public:
 	ClientSocket();

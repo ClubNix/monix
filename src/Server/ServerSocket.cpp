@@ -1,7 +1,11 @@
 #include "ServerSocket.h"
 #include <iostream>
 
-ServerSocket::ServerSocket() : pushSocket_(context_,ZMQ_PUSH), pullSocket_(context_,ZMQ_PULL){
+ServerSocket::ServerSocket():
+pushSocket_(context_,ZMQ_PUSH),
+pullSocket_(context_,ZMQ_PULL),
+pubSocket_(context_,ZMQ_PUB){
+	pubSocket_.bind("tcp://*42923");
 	pullSocket_.bind("tcp://*:42923");
 	pushSocket_.connect("tcp://localhost:42924");
 }
