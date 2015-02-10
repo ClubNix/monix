@@ -14,6 +14,7 @@ public:
 	std::string message() const;
 	int operator>>(std::string& message);
 	void operator<<(std::string request);
+	void publish(std::string message);
 };
 
 #endif /* __ServerSocket_H__ */
