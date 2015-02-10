@@ -20,29 +20,29 @@ int main(int argc, char* argv[]){
 //	gui.mvprintw(LINES/2, COLS/3, response.c_str());
 	gui.debugPrint("miaou");
 	ClientParser::NameMoneyList userList = ClientParser::parse(response);
-	GuiMenu menu(&gui, LINES, COLS/2);
+	
 	for(auto user : userList){
-		menu.addItem(user.first.c_str(), user.second.c_str());
+		gui.getMenu().addItem(user.first.c_str(), user.second.c_str());
 	}
-	menu.createMenu();
+	gui.getMenu().createMenu();
 
 	int ch;
 	do{
 		gui >> ch;
 		switch(ch){
 			case KEY_DOWN:
-				menu.down();
+				gui.getMenu().down();
 				break;
 			
 			case KEY_UP:
-				menu.up();
+				gui.getMenu().up();
 				break;
 			case '+':
-				menu++;
+				gui.getMenu()++;
 				break;
 				
 			case '-':
-				menu--;
+				gui.getMenu()--;
 				break;
 				
 			default:
