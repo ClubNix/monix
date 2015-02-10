@@ -3,6 +3,7 @@
 #include <string>
 #include "GuiMenu.h"
 #include "Gui.h"
+#include "ClientSocket.h"
 
 GuiMenu::GuiMenu(Window *parent, int rows, int cols) : Window(parent), rows_(rows), cols_(cols){
 	window(derwin(parent->window(), rows_-2, cols_-3, 1, 1));
@@ -43,7 +44,9 @@ GuiMenu& GuiMenu::operator--(int){
 	Gui& gui = dynamic_cast<Gui&>(*parent());
 	ITEM *item = current_item(menu_);
 	std::string pseudo(item_name(item));
-	gui.debugPrint(pseudo + "--");
+	ClientSocket socket;
+	socket << "decUserBalanceByOne(" + pseudo + ")";
+//	gui.debugPrint(pseudo + "--");
 	return (*this);
 }
 
@@ -51,7 +54,9 @@ GuiMenu& GuiMenu::operator++(int){
 	Gui& gui = dynamic_cast<Gui&>(*parent());
 	ITEM *item = current_item(menu_);
 	std::string pseudo(item_name(item));
-	gui.debugPrint(pseudo + "++");
+	ClientSocket socket;
+	socket << "incUserBalanceByOne(" + pseudo + ")";
+//	gui.debugPrint(pseudo + "++");
 	return (*this);
 }
 
