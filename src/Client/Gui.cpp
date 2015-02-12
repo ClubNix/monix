@@ -1,4 +1,5 @@
 #include "Gui.h"
+#include "GuiMenu.h"
 #include <ncurses.h>
 #include <menu.h>
 #include <iostream>
@@ -17,6 +18,8 @@ Gui::Gui(){
 	attron(COLOR_PAIR(RED));
 	box(window(),0,0);
 	attroff(COLOR_PAIR(RED));
+	
+	menu_ = new GuiMenu(this, LINES, COLS/2);
 }
 
 
@@ -38,7 +41,12 @@ void Gui::operator>>(int &ch){
 	ch = getch();
 }
 
+GuiMenu& Gui::getMenu(){
+	return *menu_;
+}
+
 Gui::~Gui(){
+	delete menu_;
 	endwin();
 }
 

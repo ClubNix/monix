@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Window.h"
+#include "GuiMenu.h"
 
 class Gui : public Window{
 public:
@@ -16,7 +17,11 @@ public:
 	void mvprintw(int y, int x, std::string message, int color = GREEN);
 	void operator>>(int &ch);
 	void debugPrint(std::string message);
+	GuiMenu& getMenu();
 	~Gui();
+	
+private:
+	GuiMenu* menu_;
 };
 
 #endif /* __Gui_H__ */
