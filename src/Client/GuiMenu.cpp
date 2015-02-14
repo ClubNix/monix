@@ -7,10 +7,12 @@
 
 GuiMenu::GuiMenu(Window *parent, int rows, int cols) : Window(parent), rows_(rows), cols_(cols){
 	window(derwin(parent->window(), rows_-2, cols_-3, 1, 1));
+	item_.push_back(NULL);
 }
 
 void GuiMenu::addItem(const char* name, const char* description){
-	item_.push_back(new_item(name, description));
+	item_[item_.size() - 1] = new_item(name, description);
+	item_.push_back(NULL);
 }
 
 GuiMenu::~GuiMenu(){
@@ -21,7 +23,6 @@ GuiMenu::~GuiMenu(){
 }
 
 void GuiMenu::createMenu(){
-	item_.push_back(NULL);
 	menu_ = new_menu(item_.data());
 	set_menu_win(menu_, window());
 	set_menu_sub(menu_, derwin(window(), 0, 0, 1, 1));
