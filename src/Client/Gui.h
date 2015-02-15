@@ -18,6 +18,7 @@ public:
 	void operator>>(int &ch);
 	void debugPrint(std::string message);
 	GuiMenu& getMenu();
+	void getMembers();
 	~Gui();
 	
 private:

@@ -1,8 +1,10 @@
-#include "Gui.h"
-#include "GuiMenu.h"
 #include <ncurses.h>
 #include <menu.h>
 #include <iostream>
+#include "Gui.h"
+#include "GuiMenu.h"
+#include "ClientSocket.h"
+#include "ClientParser.h"
 
 Gui::Gui(){
 	initscr();
@@ -43,6 +45,23 @@ void Gui::operator>>(int &ch){
 
 GuiMenu& Gui::getMenu(){
 	return *menu_;
+}
+
+void Gui::getMembers(){
+	delete menu_;
+	menu_ = new GuiMenu(this, LINES, COLS/2);
+	
+	ClientSocket& socket = *(new ClientSocket());
+	socket << std::string("displayMembers()");
+	std::string response;
+	socket >> response;
+	delete &socket;
+	
+	ClientParser::NameMoneyList userList = ClientParser::parse(response);
+	for(auto user : userList){
+		getMenu().addItem(user.first.c_str(), user.second.c_str());
+	}
+	getMenu().createMenu();
 }
 
 Gui::~Gui(){
