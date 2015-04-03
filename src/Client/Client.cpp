@@ -1,59 +1,40 @@
 #include <string>
 #include <iostream>
-#include <ncurses.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "ClientSocket.h"
-#include "Gui.h"
-#include "GuiMenu.h"
 #include "ClientParser.h"
 
 int main(int argc, char* argv[]){
-//	ClientSocket& socket = *(new ClientSocket());
+	ClientSocket& socket = *(new ClientSocket());
 //	socket << std::string("addUser(Flandre,18)");
-//	socket << std::string("displayMembers()");
+	socket << std::string("displayMembers()");
 //	socket << std::string("getUserBalance(Flandre)");
-//	std::string response;
-//	socket >> response;
-//	delete &socket;
-//	std::string response = "Flandre : 18";
-	Gui gui;
+	std::string response;
+	socket >> response;
+	delete &socket;
 	
-//	gui.mvprintw(LINES/2, COLS/3, response.c_str());
-//	gui.debugPrint("miaou");
-//	ClientParser::NameMoneyList userList = ClientParser::parse(response);
-//	
-//	for(auto user : userList){
-//		gui.getMenu().addItem(user.first.c_str(), user.second.c_str());
-//	}
-//	gui.getMenu().createMenu();
-	gui.getMembers();
-	int ch;
-	do{
-		gui >> ch;
-		switch(ch){
-			case KEY_DOWN:
-				gui.getMenu().down();
-				break;
-			
-			case KEY_UP:
-				gui.getMenu().up();
-				break;
-			case '+':
-				gui.getMenu()++;
-				break;
-				
-			case '-':
-				gui.getMenu()--;
-				break;
-			
-			case 'a':
-				gui.getMembers();
-				break;
-			
-			default:
-				gui.debugPrint(std::to_string(ch));
-				break;
+	sf::RenderWindow gui(
+		sf::VideoMode(480, 320),
+		"Monix - Client"
+	);
+
+	while(gui.isOpen()){
+		sf::Event event;
+		while(gui.pollEvent(event)){
+			switch(event.type){
+				case sf::Event::Closed:
+					gui.close();
+					break;
+				default:
+					break;
+			}
 		}
-	}while(ch != 'q');
+		
+		gui.clear(sf::Color::Black);
+		gui.display();
+		
+	}
 //	socket << std::string("quit");
 	return EXIT_SUCCESS;
 }

@@ -29,7 +29,7 @@ ifeq ($(config),)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11
-  LIBS      += -lzmq -lncurses -lmenu
+  LIBS      += -lzmq -lncurses -lmenu -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -42,11 +42,9 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/Gui.o \
 	$(OBJDIR)/ClientSocket.o \
 	$(OBJDIR)/ClientParser.o \
 	$(OBJDIR)/Client.o \
-	$(OBJDIR)/GuiMenu.o \
 
 RESOURCES := \
 
@@ -107,9 +105,6 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/Gui.o: src/Client/Gui.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ClientSocket.o: src/Client/ClientSocket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -117,9 +112,6 @@ $(OBJDIR)/ClientParser.o: src/Client/ClientParser.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Client.o: src/Client/Client.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/GuiMenu.o: src/Client/GuiMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
