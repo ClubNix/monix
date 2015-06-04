@@ -9,5 +9,6 @@ end
 local testButton = Button:new()
 
 function love.draw()
+	testButton:draw()
 end
 
