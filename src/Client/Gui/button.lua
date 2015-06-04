@@ -8,3 +8,11 @@ function Button:new()
 	return setmetatable(button, {__index = self})
 end
 
+function Button:draw()
+	local color = {love.graphics.getColor()}
+	love.graphics.rectangle("fill",self.position.x, self.position.y, self.size.width, self.position.height)
+	love.graphics.setColor(unpack(color))
+end
+
+return Button
+
