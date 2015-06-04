@@ -1,0 +1,4 @@
+local EventManager = {}
+
+return EventManager
+
