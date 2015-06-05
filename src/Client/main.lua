@@ -1,4 +1,4 @@
-Button = require("Gui/button")
+Button = require("Gui/Button")
 
 function love.load()
 end

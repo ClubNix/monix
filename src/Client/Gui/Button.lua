@@ -15,5 +15,15 @@ function Button:draw()
 	love.graphics.setColor(unpack(color))
 end
 
+function Button:isIn(x, y)
+	local isInX = (self.position.x <= x and x <= self.position.x + self.size.width)
+	local isInY = (self.position.y <= y and y <= self.position.y + self.size.height)
+	if isInX and isInY then
+		return true
+	else
+		return false
+	end
+end
+
 return Button
 
