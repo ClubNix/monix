@@ -1,5 +1,5 @@
 Button = require("Gui/Button")
-EventManager = require("Gui/EventManager")
+ButtonManager = require("Gui/ButtonManager")
 
 function love.load()
 end
@@ -8,7 +8,7 @@ function love.update(dt)
 end
 
 local testButton = Button:new()
-EventManager:addButton(testButton)
+ButtonManager:addButton(testButton)
 
 function love.draw()
 	testButton:draw()
