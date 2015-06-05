@@ -9,7 +9,6 @@ end
 
 local testButton = Button:new()
 EventManager:addButton(testButton)
-EventManager:manage()
 
 function love.draw()
 	testButton:draw()
