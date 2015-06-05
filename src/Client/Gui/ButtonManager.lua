@@ -38,8 +38,8 @@ love.mousereleased = function(x, y, button)
 				if v.isPressed then
 					love.event.push("buttonevent","click",k)
 				end
-				v.isPressed = false
 			end
+			v.isPressed = false
 		end
 	end
 end
