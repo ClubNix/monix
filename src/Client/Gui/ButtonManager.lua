@@ -32,9 +32,12 @@ love.mousereleased = function(x, y, button)
 	end
 end
 
-love.handlers.buttonevent = function(what, key)
+love.handlers.buttonevent = function(what, key, c, d)
 	local object = ButtonManager.button[key]
-	print(object,"is "..what)
+	if object[what] then
+		object[what](object,c,d)
+	end
+--	print(object,"is "..what)
 end
 
 return ButtonManager
