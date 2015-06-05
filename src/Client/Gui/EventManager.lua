@@ -7,20 +7,24 @@ function EventManager:addButton(button)
 end
 
 love.mousepressed = function(x, y, button)
-	for k,v in ipairs(EventManager.button) do
-		if v:isIn(x,y) then
-			v.isPressed = true
+	if button == "l" then
+		for k,v in ipairs(EventManager.button) do
+			if v:isIn(x,y) then
+				v.isPressed = true
+			end
 		end
 	end
 end
 
 love.mousereleased = function(x, y, button)
-	for k,v in ipairs(EventManager.button) do
-		if v:isIn(x,y) then
-			if v.isPressed then
-				love.event.push("eventmanager","click",k)
+	if button == "l" then
+		for k,v in ipairs(EventManager.button) do
+			if v:isIn(x,y) then
+				if v.isPressed then
+					love.event.push("eventmanager","click",k)
+				end
+				v.isPressed = false
 			end
-			v.isPressed = false
 		end
 	end
 end
