@@ -18,11 +18,16 @@ love.mousereleased = function(x, y, button)
 	for k,v in ipairs(EventManager.button) do
 		if v:isIn(x,y) then
 			if v.isPressed then
-				print(v,"is Click")
+				love.event.push("eventmanager","click",k)
 			end
 			v.isPressed = false
 		end
 	end
+end
+
+love.handlers.eventmanager = function(what, key)
+	local object = EventManager.button[key]
+	print(object,"is "..what)
 end
 
 return EventManager
