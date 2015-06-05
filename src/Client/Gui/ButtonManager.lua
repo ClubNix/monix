@@ -1,14 +1,17 @@
-local EventManager = {}
+local Button = require("Gui/Button")
+local ButtonManager = {}
 
-EventManager.button = {}
+ButtonManager.button = {}
 
-function EventManager:addButton(button)
+function ButtonManager:newButton()
+	local button = Button:new()
 	table.insert(self.button, button)
+	return button
 end
 
 love.mousepressed = function(x, y, button)
 	if button == "l" then
-		for k,v in ipairs(EventManager.button) do
+		for k,v in ipairs(ButtonManager.button) do
 			if v:isIn(x,y) then
 				v.isPressed = true
 			end
@@ -18,10 +21,10 @@ end
 
 love.mousereleased = function(x, y, button)
 	if button == "l" then
-		for k,v in ipairs(EventManager.button) do
+		for k,v in ipairs(ButtonManager.button) do
 			if v:isIn(x,y) then
 				if v.isPressed then
-					love.event.push("eventmanager","click",k)
+					love.event.push("buttonevent","click",k)
 				end
 				v.isPressed = false
 			end
@@ -29,10 +32,10 @@ love.mousereleased = function(x, y, button)
 	end
 end
 
-love.handlers.eventmanager = function(what, key)
-	local object = EventManager.button[key]
+love.handlers.buttonevent = function(what, key)
+	local object = ButtonManager.button[key]
 	print(object,"is "..what)
 end
 
-return EventManager
+return ButtonManager
 
