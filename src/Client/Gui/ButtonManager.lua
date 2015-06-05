@@ -2,9 +2,21 @@ local Button = require("Gui/Button")
 local ButtonManager = {}
 
 ButtonManager.button = {}
+ButtonManager.defaultButton = Button:new()
 
-function ButtonManager:newButton()
-	local button = Button:new()
+function ButtonManager:default(buttonAttribute)
+	for k,v in pairs(buttonAttribute) do
+		self.defaultButton[k] = v
+	end
+end
+
+function ButtonManager:newButton(x,y,width,height)
+	if x then self.defaultButton.position.x = x end
+	if y then self.defaultButton.position.y = y end
+	if width then self.defaultButton.size.width = width end
+	if height then self.defaultButton.size.height = height end
+	
+	local button = Button:new(self.defaultButton)
 	table.insert(self.button, button)
 	return button
 end

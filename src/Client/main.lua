@@ -6,12 +6,18 @@ end
 function love.update(dt)
 end
 
-local testButton = ButtonManager:newButton()
-testButton.click = function(self)
-	print(self, "i am click")
+local testButton1 = ButtonManager:newButton()
+testButton1.click = function(self)
+	print(self, "button1 click")
 end
 
+ButtonManager:default({color= {0,255,0,255}})
+local testButton2 = ButtonManager:newButton(100)
+testButton2.click = function(self)
+	print(self, "button2 click")
+end
 function love.draw()
-	testButton:draw()
+	testButton1:draw()
+	testButton2:draw()
 end
 

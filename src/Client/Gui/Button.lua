@@ -1,11 +1,10 @@
 local Button = {miaou= function() print("Button") end}
 
 function Button:new(o)
-	local button = o or {
-		position = {x=0, y=0},
-		size = {width=80, height=60},
-		color = {0,0,255,255},
-	}
+	local button = {}
+	button.position = o and o.position or {x=0, y=0}
+	button.size = o and o.size or {width=80, height=60}
+	button.color = o and o.color or {0,0,255,255}
 	return setmetatable(button, {__index = self})
 end
 
