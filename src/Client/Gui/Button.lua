@@ -1,4 +1,4 @@
-local Button = {miaou= function() print("Button") end}
+local Button = {}
 
 function Button:new(o)
 	local button = {}
@@ -17,7 +17,8 @@ function Button:new(o)
 		button.size = {width=80, height=60}
 		button.color = {0,0,255,255}
 	end
-	return setmetatable(button, {__index = self})
+	self.__index = self
+	return setmetatable(button, self)
 end
 
 function Button:draw()
