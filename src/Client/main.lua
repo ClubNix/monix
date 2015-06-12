@@ -1,4 +1,4 @@
-ButtonManager = require("Gui/ButtonManager")
+ButtonManager = require "Gui/ButtonManager"
 
 function love.load()
 end
@@ -12,7 +12,7 @@ testButton1.click = function(self)
 end
 
 ButtonManager:default({color= {0,255,0,255}})
-local testButton2 = ButtonManager:newButton(100)
+local testButton2 = ButtonManager:newButton(400,400)
 testButton2.click = function(self)
 	print(self, "button2 click")
 end

@@ -1,4 +1,6 @@
-local Button = require("Gui/Button")
+local Button = require "Gui/Button"
+local Card = require "Gui/Card"
+Button = Card
 local ButtonManager = {}
 
 ButtonManager.button = {}
