@@ -13,17 +13,22 @@ end
 
 function Card:draw()
 	local color = {love.graphics.getColor()}
-	local headerColor = {unpack(self.color)} --copy
-	headerColor[4] = 0.5*255
-	love.graphics.setColor(unpack(headerColor))
+	local header = {}
+	header.color = {unpack(self.color)} --copy
+	header.color[4] = 0.5*255
+	header.position = {x= self.position.x, y= self.position.y-self.size.height/4}
+	header.size = {width= self.size.width, height= self.size.height/4}
+	
+	love.graphics.setColor(header.color)
 	love.graphics.rectangle(
 		"fill",
-		self.position.x,
-		self.position.y-self.size.height/4,
-		self.size.width,
-		self.size.height/4
+		header.position.x,
+		header.position.y,
+		header.size.width,
+		header.size.height
 	)
 	love.graphics.setColor(unpack(color))
+	love.graphics.print(self.title,header.position.x, header.position.y,0,1,1,0)
 	Button.draw(self)
 end
 
