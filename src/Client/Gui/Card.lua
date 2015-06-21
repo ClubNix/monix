@@ -28,7 +28,9 @@ function Card:draw()
 		header.size.height
 	)
 	love.graphics.setColor(unpack(color))
-	love.graphics.print(self.title,header.position.x, header.position.y,0,1,1,0)
+	local titleSize = #self.title
+	local flushedRightTitle = math.floor(header.size.width-(titleSize*8)) --TODO use monospace font
+	love.graphics.print(self.title,header.position.x, header.position.y,0,1,1,-flushedRightTitle)
 	Button.draw(self)
 end
 
