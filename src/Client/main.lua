@@ -1,6 +1,13 @@
 ButtonManager = require "Gui/ButtonManager"
+local zmq = require "lzmq"
 
 function love.load()
+	local context = zmq.context()
+	local socketPush,err = context:socket{zmq.PUSH, connect = "tcp://localhost:42923"}
+	local socketPull,err = context:socket{zmq.PULL, bind = "tcp://*:42924"}
+	socketPush:send("addUser(Suwako,23)")
+	socketPush:send("displayMembers()")
+	print(socketPull:recv())
 end
 
 function love.update(dt)
