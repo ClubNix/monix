@@ -3,7 +3,7 @@ local Card = require "Gui/Card"
 Button = Card
 local ButtonManager = {}
 
-ButtonManager.button = {}
+ButtonManager.buttonList = {}
 ButtonManager.defaultButton = Button:new()
 
 function ButtonManager:default(buttonAttribute)
@@ -19,13 +19,13 @@ function ButtonManager:newButton(x,y,width,height)
 	if height then self.defaultButton.size.height = height end
 	
 	local button = Button:new(self.defaultButton)
-	table.insert(self.button, button)
+	table.insert(self.buttonList, button)
 	return button
 end
 
 love.mousepressed = function(x, y, button)
 	if button == "l" then
-		for k,v in ipairs(ButtonManager.button) do
+		for k,v in ipairs(ButtonManager.buttonList) do
 			if v:isIn(x,y) then
 				v.isPressed = true
 			end
@@ -35,7 +35,7 @@ end
 
 love.mousereleased = function(x, y, button)
 	if button == "l" then
-		for k,v in ipairs(ButtonManager.button) do
+		for k,v in ipairs(ButtonManager.buttonList) do
 			if v:isIn(x,y) then
 				if v.isPressed then
 					love.event.push("buttonevent","click",k)
@@ -47,12 +47,17 @@ love.mousereleased = function(x, y, button)
 end
 
 love.handlers.buttonevent = function(what, key, c, d)
-	local object = ButtonManager.button[key]
-	if object[what] then
+	local object = ButtonManager.buttonList[key]
+	if type(object[what]) == "function" then
 		object[what](object,c,d)
 	end
 --	print(object,"is "..what)
 end
 
-return ButtonManager
+function ButtonManager:draw()
+	for k,v in ipairs(self.buttonList) do
+		v:draw()
+	end
+end
 
+return ButtonManager

@@ -12,11 +12,14 @@ end
 
 ButtonManager:default({color= {0,255,0,255}, size={height=60, width=100}})
 local testButton2 = ButtonManager:newButton(400,400)
+ButtonManager:newButton(500,500)
+
 testButton2.click = function(self)
 	print(self, "button2 click")
 	Model:displaySum()
 end
+
 function love.draw()
-	testButton2:draw()
+	ButtonManager:draw()
 end
 
