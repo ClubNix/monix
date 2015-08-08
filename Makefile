@@ -6,7 +6,7 @@ ifndef config
 endif
 export config
 
-PROJECTS := server client
+PROJECTS := server
 
 .PHONY: all clean help $(PROJECTS)
 
@@ -16,13 +16,8 @@ server:
 	@echo "==== Building server ($(config)) ===="
 	@${MAKE} --no-print-directory -C . -f server.make
 
-client: 
-	@echo "==== Building client ($(config)) ===="
-	@${MAKE} --no-print-directory -C . -f client.make
-
 clean:
 	@${MAKE} --no-print-directory -C . -f server.make clean
-	@${MAKE} --no-print-directory -C . -f client.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -34,6 +29,5 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   server"
-	@echo "   client"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

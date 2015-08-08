@@ -2,6 +2,5 @@ Driver/
 !Driver/.gitkeep
 monix
 server
-client
 obj/
 !includes/mongo/client/

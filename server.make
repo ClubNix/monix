@@ -42,11 +42,11 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/Server.o \
-	$(OBJDIR)/Mongo.o \
 	$(OBJDIR)/ServerSocket.o \
+	$(OBJDIR)/Server.o \
 	$(OBJDIR)/RPC.o \
 	$(OBJDIR)/MongoWrapper.o \
+	$(OBJDIR)/Mongo.o \
 
 RESOURCES := \
 
@@ -107,19 +107,19 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/Server.o: src/Server/Server.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ServerSocket.o: src/Server/ServerSocket.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Server.o: src/Server/Server.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/RPC.o: src/Server/RPC.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MongoWrapper.o: src/Server/MongoWrapper.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

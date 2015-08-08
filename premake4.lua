@@ -15,20 +15,3 @@ solution "Monix"
 		    "-Wno-undefined-bool-conversion"
       })
       linkoptions({"-std=c++11"})
-
-   project "client"
-      kind "ConsoleApp"
-      language "C++"
-      files{
-      	"src/Client/*.h",
-      	"src/Client/*.cpp",
-      }
-      includedirs({"src/Client/"})
-      
-      flags({"Symbols", "ExtraWarnings", })
-      links({"zmq", "ncurses", "menu"})
-      
-      buildoptions({"-std=c++11"})
-      linkoptions({"-std=c++11"})
-
-
