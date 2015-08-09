@@ -3,11 +3,12 @@ ZMQDriver = require "Model.ZMQDriver"
 Model = require "Model.Parser"
 
 function love.load()
-	ButtonManager:default({color= {0,255,0,255}, size={height=60, width=100}, position={x=100,y=100}, title="Club*Nix"})
 	Model:init(ZMQDriver)
+	local i=1
 	for memberString in Model:memberList() do
 		local pseudo, money = Model:parse(memberString)
-		ButtonManager:newButton{x= money*10, account= pseudo}
+		ButtonManager:newButton{x= i*130, account= pseudo, credit= money}
+		i = i+1
 	end
 end
 

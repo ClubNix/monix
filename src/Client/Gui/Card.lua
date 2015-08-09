@@ -5,9 +5,9 @@ local Card = Button:new()
 function Card:new(defaultCard)
 	local card	= Button:new(defaultCard)
 	if defaultCard then
-		card.title	= defaultCard.title or "miaou"
-		card.account	= defaultCard.account or "cirno"
-		card.credit	= defaultCard.credit or "9"
+		card.title	= defaultCard.title
+		card.account	= defaultCard.account
+		card.credit	= defaultCard.credit
 	end
 	self.__index	= self
 	return setmetatable(card,self)

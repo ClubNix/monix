@@ -2,7 +2,14 @@ local Card = require "Gui/Card"
 local ButtonManager = {}
 
 ButtonManager.buttonList = {}
-ButtonManager.defaultButton = Card:new()
+ButtonManager.defaultButton = Card:new{
+	color=	{0,255,0,255},
+	size=	{height=60, width=120},
+	position=	{x=100,y=100},
+	title=	"Compte",
+	account=	"root",
+	credit=	"-1",
+}
 
 function ButtonManager:default(buttonAttribute)
 	for k,v in pairs(buttonAttribute) do
