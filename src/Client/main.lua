@@ -4,7 +4,9 @@ Model = require "Model.Parser"
 
 function love.load()
 	Model:init(ZMQDriver)
-	Model:print()
+	for memberString in Model:memberList() do
+		local pseudo, money = Model:parse(memberString)
+	end
 end
 
 function love.update(dt)
