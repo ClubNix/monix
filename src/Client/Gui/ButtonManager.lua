@@ -12,13 +12,27 @@ function ButtonManager:default(buttonAttribute)
 	end
 end
 
-function ButtonManager:newButton(x,y,width,height)
+function ButtonManager:newButton(o)
+	local defaultButton = {
+		position= {
+			x=	o.x or self.defaultButton.position.x,
+			y=	o.y or self.defaultButton.position.y
+		},
+		size= {
+			width=	o.width or self.defaultButton.size.width,
+			height=	o.height or self.defaultButton.size.height
+		},
+		color= {
+			unpack(o.color or self.defaultButton.color)
+		},
+	}
+	
 	if x then self.defaultButton.position.x = x end
 	if y then self.defaultButton.position.y = y end
 	if width then self.defaultButton.size.width = width end
 	if height then self.defaultButton.size.height = height end
 	
-	local button = Button:new(self.defaultButton)
+	local button = Button:new(defaultButton)
 	table.insert(self.buttonList, button)
 	return button
 end
