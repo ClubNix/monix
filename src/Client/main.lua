@@ -1,6 +1,6 @@
-ButtonManager = require "Gui/ButtonManager"
-ZMQDriver = require "Model"
-Model = require "ModelParser"
+ButtonManager = require "Gui.ButtonManager"
+ZMQDriver = require "Model.ZMQDriver"
+Model = require "Model.Parser"
 
 function love.load()
 	Model:init(ZMQDriver)
