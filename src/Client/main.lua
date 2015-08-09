@@ -1,10 +1,10 @@
 ButtonManager = require "Gui/ButtonManager"
-Model = require "Model"
-
+ZMQDriver = require "Model"
+Model = require "ModelParser"
 
 function love.load()
-	Model:connect()
-	print(Model:displayMembers())
+	Model:init(ZMQDriver)
+	Model:print()
 end
 
 function love.update(dt)
