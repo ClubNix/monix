@@ -2,45 +2,48 @@ local M = {}
 
 local iterator = function()
 	local x,y = M.offset.x, M.offset.y
-	while y + M.cardHeight + M.padding < M.windowHeight do
-		while x + M.cardWidth + M.padding < M.windowWidth do
+	while (y + M.cardHeight + M.padding) < M.windowHeight do
+		while (x + M.cardWidth + M.padding) < M.windowWidth do
 			coroutine.yield(x,y)
 			x = x+ M.cardWidth + M.padding
 		end
+		x = M.offset.x
 		y = y+ M.cardHeight + M.padding
 	end
 end
 
-function M.init(dimension, offset)
+function M:init(dimension)
 	if dimension then
 		if dimension.card then
-			M.cardWidth	= dimension.card.width
-			M.cardHeight	= dimension.card.height
+			self.cardWidth	= dimension.card.width or 120
+			self.cardHeight	= dimension.card.height or 80
 		else
-			M.cardWidth	= 120
-			M.cardHeight	= 60
+			self.cardWidth	= 120
+			self.cardHeight	= 80
 		end
 		
 		if dimension.window then
-			M.windowWidth	= dimension.window.width 
-			M.windowHeight	= dimension.window.height
+			self.windowWidth	= dimension.window.width or 800
+			self.windowHeight	= dimension.window.height or 600
 		else
-			M.windowWidth	= 800
-			M.windowHeight	= 600
+			self.windowWidth	= 800
+			self.windowHeight	= 600
 		end
-		M.padding =	dimension.padding or 10
+
+		if dimension.offset then
+			self.offset = {x=dimension.offset.x or 0, y= dimension.offset.y or 0}
+		else
+			self.offset = {x=0, y=0}
+		end
+		
+		self.padding =	dimension.padding or 10
 	else
-		M.padding	= 10
-		M.cardWidth	= 120
-		M.cardHeight	= 60
-		M.windowWidth	= 800
-		M.windowHeight	= 600
-	end
-	
-	if offset then
-		M.offset = {x=offset.x, y= offset.y}
-	else
-		M.offset = {x=0, y=0}
+		self.offset	= {x=0, y=0}
+		self.padding	= 10
+		self.cardWidth	= 120
+		self.cardHeight	= 80
+		self.windowWidth	= 800
+		self.windowHeight	= 600
 	end
 	
 	return coroutine.wrap(iterator)
