@@ -1,14 +1,16 @@
 ButtonManager = require "Gui.ButtonManager"
 ZMQDriver = require "Model.ZMQDriver"
 Model = require "Model.Parser"
+Grid = require "Gui.Grid"
 
 function love.load()
 	Model:init(ZMQDriver)
-	local i=1
+	local position = Grid:init()
 	for memberString in Model:memberList() do
 		local pseudo, money = Model:parse(memberString)
-		ButtonManager:newButton{x= i*130, account= pseudo, credit= money}
-		i = i+1
+		local x,y = position()
+		print(x,y)
+		ButtonManager:newButton{x=x, y=y, account= pseudo, credit= money}
 	end
 end
 
