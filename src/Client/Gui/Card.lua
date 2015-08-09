@@ -4,6 +4,7 @@ local Card = Button:new()
 
 function Card:new(defaultCard)
 	local card	= Button:new(defaultCard)
+	card.position.y = card.position.y+card.size.height/3
 	if defaultCard then
 		card.title	= defaultCard.title
 		card.account	= defaultCard.account
