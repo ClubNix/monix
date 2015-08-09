@@ -1,10 +1,8 @@
-local Button = require "Gui/Button"
 local Card = require "Gui/Card"
-Button = Card
 local ButtonManager = {}
 
 ButtonManager.buttonList = {}
-ButtonManager.defaultButton = Button:new()
+ButtonManager.defaultButton = Card:new()
 
 function ButtonManager:default(buttonAttribute)
 	for k,v in pairs(buttonAttribute) do
@@ -13,7 +11,7 @@ function ButtonManager:default(buttonAttribute)
 end
 
 function ButtonManager:newButton(o)
-	local defaultButton = {
+	local newButton = {
 		position= {
 			x=	o.x or self.defaultButton.position.x,
 			y=	o.y or self.defaultButton.position.y
@@ -25,14 +23,12 @@ function ButtonManager:newButton(o)
 		color= {
 			unpack(o.color or self.defaultButton.color)
 		},
+		title = o.title or self.defaultButton.title,
+		account = o.account or self.defaultButton.account,
+		credit = o.credit or self.defaultButton.credit
 	}
 	
-	if x then self.defaultButton.position.x = x end
-	if y then self.defaultButton.position.y = y end
-	if width then self.defaultButton.size.width = width end
-	if height then self.defaultButton.size.height = height end
-	
-	local button = Button:new(defaultButton)
+	local button = Card:new(newButton)
 	table.insert(self.buttonList, button)
 	return button
 end

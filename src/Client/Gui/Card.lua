@@ -3,11 +3,13 @@ Button = require "Gui/Button"
 local Card = Button:new()
 
 function Card:new(defaultCard)
-	local card = Button:new(defaultCard)
-	card.title = "miaou"
-	card.account = "cirno"
-	card.credit = "9"
-	self.__index = self
+	local card	= Button:new(defaultCard)
+	if defaultCard then
+		card.title	= defaultCard.title or "miaou"
+		card.account	= defaultCard.account or "cirno"
+		card.credit	= defaultCard.credit or "9"
+	end
+	self.__index	= self
 	return setmetatable(card,self)
 end
 
