@@ -2,10 +2,17 @@ local M = {}
 
 local iterator = function()
 	local x,y = M.offset.x, M.offset.y
+	card_count = 0
 	while (y + M.cardHeight + M.padding) < M.windowHeight do
 		while (x + M.cardWidth + M.padding) < M.windowWidth do
 			coroutine.yield(x,y)
-			x = x+ M.cardWidth + M.padding
+			card_count = card_count + 1
+			if card_count < 10 then
+				x = x+ M.cardWidth + M.padding
+			else
+				x = M.offset.x
+				y = M.offset.y
+			end
 		end
 		x = M.offset.x
 		y = y+ M.cardHeight + M.padding
