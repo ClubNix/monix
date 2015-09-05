@@ -7,7 +7,7 @@ solution "Monix"
       includedirs({"src/Server/", "includes"})
       
       flags({"Symbols", "ExtraWarnings", })
-      links({"mongoclient", "boost_thread-mt", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq"})
+      links({"mongoclient", "boost_thread", "boost_system", "boost_regex", "pthread", "boost_filesystem", "zmq"})
       libdirs({"Driver/"})
       
       buildoptions({"-std=c++11",

@@ -2,6 +2,8 @@ local Card = require "Gui/Card"
 local ButtonManager = {}
 
 ButtonManager.buttonList = {}
+ButtonManager.pages = 0
+ButtonManager.currentPage = 1
 ButtonManager.defaultButton = Card:new{
 	color=	{0,255,0,255},
 	size=	{height=60, width=120},
@@ -37,7 +39,12 @@ function ButtonManager:newButton(o)
 	
 	local button = Card:new(newButton)
 	table.insert(self.buttonList, button)
+	
 	return button
+end
+
+function ButtonManager:pagination()
+	self.pages = math.ceil(#self.buttonList / 10)
 end
 
 love.mousepressed = function(x, y, button)
@@ -71,9 +78,37 @@ love.handlers.buttonevent = function(what, key, c, d)
 --	print(object,"is "..what)
 end
 
+love.keypressed = function(key)
+	if key == "p" then
+		ButtonManager:updatePage("next")
+	end
+	if key == "o" then
+		ButtonManager:updatePage("prev")
+	end
+end
+
+function ButtonManager:updatePage(action)
+	if action == "next" then
+		if self.currentPage < self.pages then
+			self.currentPage = self.currentPage + 1
+		end
+	end
+	if action == "prev" then
+		if self.currentPage > 1 then
+			self.currentPage = self.currentPage - 1
+		end
+	end
+end
+
 function ButtonManager:draw()
-	for k,v in ipairs(self.buttonList) do
-		v:draw()
+	if self.currentPage == self.pages then
+		for i = (self.currentPage-1)*10+1, #self.buttonList do
+			self.buttonList[i]:draw()
+		end
+	else
+		for i = (self.currentPage-1)*10+1, self.currentPage*10 do
+			self.buttonList[i]:draw()
+		end
 	end
 end
 

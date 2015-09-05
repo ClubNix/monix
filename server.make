@@ -29,7 +29,7 @@ ifeq ($(config),)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11 -Wno-deprecated-declarations -Wno-undefined-bool-conversion
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -std=c++11 -LDriver
-  LIBS      += -lmongoclient -lboost_thread-mt -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
+  LIBS      += -lmongoclient -lboost_thread -lboost_system -lboost_regex -lpthread -lboost_filesystem -lzmq
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -42,11 +42,11 @@ ifeq ($(config),)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/ServerSocket.o \
 	$(OBJDIR)/Server.o \
+	$(OBJDIR)/Mongo.o \
+	$(OBJDIR)/ServerSocket.o \
 	$(OBJDIR)/RPC.o \
 	$(OBJDIR)/MongoWrapper.o \
-	$(OBJDIR)/Mongo.o \
 
 RESOURCES := \
 
@@ -107,19 +107,19 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/ServerSocket.o: src/Server/ServerSocket.cpp
+$(OBJDIR)/Server.o: src/Server/Server.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Server.o: src/Server/Server.cpp
+$(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ServerSocket.o: src/Server/ServerSocket.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/RPC.o: src/Server/RPC.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MongoWrapper.o: src/Server/MongoWrapper.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Mongo.o: src/Server/Mongo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
