@@ -1,5 +1,5 @@
 local M = {}
-local parseFormat = '{ _id: "([%w_]+)", money: (%d+.%d+) }'
+local parseFormat = '{ _id: "([%w_]+)", money: (-?%d+.%d+) }'
 
 function M:init(model)
 	model:connect()

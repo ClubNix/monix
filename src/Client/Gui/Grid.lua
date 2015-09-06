@@ -8,7 +8,7 @@ local iterator = function()
 			coroutine.yield(x,y)
 			card_count = card_count + 1
 			if card_count < 10 then
-				x = x+ M.cardWidth + M.padding
+				x = x + M.cardWidth + M.padding
 			else
 				x = M.offset.x
 				y = M.offset.y
