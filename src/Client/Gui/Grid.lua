@@ -12,6 +12,7 @@ local iterator = function()
 			else
 				x = M.offset.x
 				y = M.offset.y
+				card_count = 0
 			end
 		end
 		x = M.offset.x
