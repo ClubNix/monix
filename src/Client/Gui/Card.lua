@@ -18,7 +18,7 @@ function Card:draw()
 	local color = {love.graphics.getColor()}
 	local header = {}
 	header.color = {unpack(self.color)} --copy
-	header.color[4] = 0.5*255
+	header.color[2] = header.color[2] - 70
 	header.position = {x= self.position.x, y= self.position.y-self.size.height/3}
 	header.size = {width= self.size.width, height= self.size.height/3}
 	

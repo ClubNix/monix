@@ -12,6 +12,7 @@ function love.load()
 		ButtonManager:newButton{x=x, y=y, account= pseudo, credit= money}
 	end
 	ButtonManager:pagination()
+	love.graphics.setBackgroundColor(13, 64, 126)
 
 end
 

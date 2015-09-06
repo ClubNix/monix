@@ -5,7 +5,7 @@ ButtonManager.buttonList = {}
 ButtonManager.pages = 0
 ButtonManager.currentPage = 1
 ButtonManager.defaultButton = Card:new{
-	color=	{0,255,0,255},
+	color=	{0,139,0,255},
 	size=	{height=60, width=120},
 	position=	{x=100,y=100},
 	title=	"Compte",
