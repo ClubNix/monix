@@ -13,13 +13,15 @@ function love.load()
 	end
 	ButtonManager:pagination()
 	love.graphics.setBackgroundColor(13, 64, 126)
-
+	
+	logo = love.graphics.newImage("resource/logo.png")
 end
 
 function love.update(dt)
 end
 
 function love.draw()
+	love.graphics.draw(logo,	love.graphics.getWidth()/2,	10,	0,	0.5,	0.5,	logo:getWidth()/2)
 	ButtonManager:draw()
 end
 
