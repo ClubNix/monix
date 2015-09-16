@@ -21,7 +21,15 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.draw(logo,	love.graphics.getWidth()/2,	10,	0,	0.5,	0.5,	logo:getWidth()/2)
+	love.graphics.draw(
+		logo,
+		love.graphics.getWidth()/2,	
+		10,
+		0,
+		0.5,
+		0.5,
+		logo:getWidth()/2
+	)
 	ButtonManager:draw()
 end
 
