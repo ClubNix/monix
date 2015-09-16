@@ -48,7 +48,7 @@ function ButtonManager:pagination()
 end
 
 love.mousepressed = function(x, y, button)
-	if button == "l" then
+	if button == "l" or button == 1 then
 		for k,v in ipairs(ButtonManager.buttonList) do
 			if v:isIn(x,y) then
 				v.isPressed = true
@@ -58,7 +58,7 @@ love.mousepressed = function(x, y, button)
 end
 
 love.mousereleased = function(x, y, button)
-	if button == "l" then
+	if button == "l" or button == 1 then
 		for k,v in ipairs(ButtonManager.buttonList) do
 			if v:isIn(x,y) then
 				if v.isPressed then
