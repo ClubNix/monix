@@ -126,13 +126,14 @@ local drawHighlightRectangle = function(button)
 	highlight.h = highlight.h + fivePercentOfACard.h*2
 	
 	-- and draw it under the card with shader effect
-	love.graphics.rectangle(
-		"fill",
-		highlight.x,
-		highlight.y,
-		highlight.w,
-		highlight.h
-	)
+	local rect = love.graphics.newMesh({
+		{highlight.x,	highlight.y,	0,	0},
+		{highlight.x+highlight.w,	highlight.y,	1,	0},
+		{highlight.x+highlight.w,	highlight.y+highlight.h,	1,	1},
+		{highlight.x,	highlight.y+highlight.h, 0, 1}
+	})
+
+	love.graphics.draw(rect)
 end
 
 function ButtonManager:draw()
