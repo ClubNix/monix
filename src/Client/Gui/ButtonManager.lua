@@ -12,6 +12,11 @@ ButtonManager.defaultButton = Card:new{
 	account=	"root",
 	credit=	"-1",
 }
+ButtonManager.selectedButton = nil
+
+function ButtonManager:setSelected(button)
+	self.selectedButton = button
+end
 
 function ButtonManager:default(buttonAttribute)
 	for k,v in pairs(buttonAttribute) do
@@ -100,14 +105,52 @@ function ButtonManager:updatePage(action)
 	end
 end
 
+local drawHighlightRectangle = function(button)
+	-- for highlight effect, make a rectangle a little bit larger than the card
+	local highlight = {
+		x= button.position.x,
+		y= button.position.y - button.size.height/3,
+		w= button.size.width,
+		h= button.size.height + button.size.height/3,
+	}
+	
+	local fivePercentOfACard = {
+		w= 0.05 * (button.size.width),
+		h= 0.05 * (button.size.height + button.size.height/3)
+	}
+	
+	-- increase highliht rectangle size
+	highlight.x = highlight.x - fivePercentOfACard.w
+	highlight.y = highlight.y - fivePercentOfACard.h
+	highlight.w = highlight.w + fivePercentOfACard.w*2
+	highlight.h = highlight.h + fivePercentOfACard.h*2
+	
+	-- and draw it under the card with shader effect
+	love.graphics.rectangle(
+		"fill",
+		highlight.x,
+		highlight.y,
+		highlight.w,
+		highlight.h
+	)
+end
+
 function ButtonManager:draw()
 	if self.currentPage == self.pages then
 		for i = (self.currentPage-1)*10+1, #self.buttonList do
-			self.buttonList[i]:draw()
+			local button = self.buttonList[i]
+			if button == self.selectedButton then
+				drawHighlightRectangle(button)
+			end
+			button:draw()
 		end
 	else
 		for i = (self.currentPage-1)*10+1, self.currentPage*10 do
-			self.buttonList[i]:draw()
+			local button = self.buttonList[i]
+			if button == self.selectedButton then
+				drawHighlightRectangle(button)
+			end
+			button:draw()
 		end
 	end
 end

@@ -12,7 +12,7 @@ function love.load()
 		local x,y = position()
 		local button = ButtonManager:newButton{x=x, y=y, account= pseudo, credit= money}
 		button.click = function(self)
-			selectedButton = self
+			ButtonManager:setSelected(self)
 		end
 	end
 	ButtonManager:pagination()
