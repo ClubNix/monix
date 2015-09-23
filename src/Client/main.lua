@@ -19,6 +19,9 @@ function love.load()
 	love.graphics.setBackgroundColor(13, 64, 126)
 	
 	logo = love.graphics.newImage("resource/logo.png")
+	
+	Shader = {}
+	Shader.highlight = love.graphics.newShader("Shader/highlight.gsl")
 end
 
 function love.update(dt)

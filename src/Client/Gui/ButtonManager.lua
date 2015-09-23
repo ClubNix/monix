@@ -115,8 +115,8 @@ local drawHighlightRectangle = function(button)
 	}
 	
 	local fivePercentOfACard = {
-		w= 0.05 * (button.size.width),
-		h= 0.05 * (button.size.height + button.size.height/3)
+		w= 0.1 * (button.size.width),
+		h= 0.1 * (button.size.height + button.size.height/3)
 	}
 	
 	-- increase highliht rectangle size
@@ -133,7 +133,9 @@ local drawHighlightRectangle = function(button)
 		{highlight.x,	highlight.y+highlight.h, 0, 1}
 	})
 
+	love.graphics.setShader(Shader.highlight)
 	love.graphics.draw(rect)
+	love.graphics.setShader()
 end
 
 function ButtonManager:draw()
