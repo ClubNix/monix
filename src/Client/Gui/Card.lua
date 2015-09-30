@@ -1,4 +1,4 @@
-Button = require "Gui/Button"
+Button = require "Gui.Button"
 
 local Card = Button:new()
 

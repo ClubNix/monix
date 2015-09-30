@@ -2,6 +2,7 @@ ButtonManager = require "Gui.ButtonManager"
 ZMQDriver = require "Model.ZMQDriver"
 Model = require "Model.Parser"
 Grid = require "Gui.Grid"
+Menu = require "Gui.Menu"
 
 function love.load()
 	Model:init(ZMQDriver)
@@ -20,6 +21,9 @@ function love.load()
 	
 	logo = love.graphics.newImage("resource/logo.png")
 	
+	Menu:setManager(ButtonManager)
+	menu = Menu:new()
+	
 	Shader = {}
 	Shader.highlight = love.graphics.newShader("Shader/highlight.gsl")
 end
@@ -28,6 +32,7 @@ function love.update(dt)
 end
 
 function love.draw()
+	menu:draw()
 	love.graphics.draw(
 		logo,
 		love.graphics.getWidth()/2,	
