@@ -5,6 +5,12 @@ Menu = {}
 -- we need to have a shared manager or love.handlers.buttonevent get erased
 function Menu:setManager(m)
 	Menu.manager = m
+	return self
+end
+
+function Menu:setModel(m)
+	Menu.model = m
+	return self
 end
 
 function Menu:new(o)
@@ -42,7 +48,12 @@ function Menu:new(o)
 		local button = Button:new(buttonTemplate)
 		self.manager:manage(button)
 		button.click = function(self)
-			print(i,self)
+			local selectedButton = Menu.manager.selectedButton
+			if selectedButton then
+				print(selectedButton.account)
+			else
+				print(i,self)
+			end
 		end
 		table.insert(menu,button)
 	end
