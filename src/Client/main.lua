@@ -3,6 +3,7 @@ ZMQDriver = require "Model.ZMQDriver"
 Model = require "Model.Parser"
 Grid = require "Gui.Grid"
 Menu = require "Gui.Menu"
+require "Gui.MenuManager"
 
 function love.load()
 	Model:init(ZMQDriver)
@@ -42,8 +43,4 @@ function love.draw()
 		logo:getWidth()/2
 	)
 	ButtonManager:draw()
-end
-
-love.handlers.menuevent = function(buttonNumber, accountName)
-	print(buttonNumber, accountName)
 end
