@@ -45,10 +45,8 @@ function Menu:new(o)
 		button.click = function(self)
 			local selectedButton = Menu.manager.selectedButton
 			if selectedButton then
-				print(selectedButton.account)
+				love.event.push("menuevent",i,selectedButton.account)
 				Menu.manager:setSelected(nil)
-			else
-				print(i,self)
 			end
 		end
 		table.insert(menu,button)

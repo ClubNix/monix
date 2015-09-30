@@ -44,3 +44,6 @@ function love.draw()
 	ButtonManager:draw()
 end
 
+love.handlers.menuevent = function(buttonNumber, accountName)
+	print(buttonNumber, accountName)
+end
