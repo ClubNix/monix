@@ -51,6 +51,7 @@ function Menu:new(o)
 			local selectedButton = Menu.manager.selectedButton
 			if selectedButton then
 				print(selectedButton.account)
+				Menu.manager:setSelected(nil)
 			else
 				print(i,self)
 			end
