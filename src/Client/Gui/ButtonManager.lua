@@ -24,6 +24,10 @@ function ButtonManager:default(buttonAttribute)
 	end
 end
 
+function ButtonManager:manage(button)
+	table.insert(self.buttonList, button)
+end
+
 function ButtonManager:newButton(o)
 	local newButton = {
 		position= {
@@ -43,7 +47,7 @@ function ButtonManager:newButton(o)
 	}
 	
 	local button = Card:new(newButton)
-	table.insert(self.buttonList, button)
+	self:manage(button)
 	
 	return button
 end
