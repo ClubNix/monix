@@ -8,11 +8,6 @@ function Menu:setManager(m)
 	return self
 end
 
-function Menu:setModel(m)
-	Menu.model = m
-	return self
-end
-
 function Menu:new(o)
 	local menu = {}
 	if o then

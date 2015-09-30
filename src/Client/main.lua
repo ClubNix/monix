@@ -21,7 +21,7 @@ function love.load()
 	
 	logo = love.graphics.newImage("resource/logo.png")
 	
-	menu = Menu:setManager(ButtonManager):setModel(Model):new()
+	menu = Menu:setManager(ButtonManager):new()
 	
 	Shader = {}
 	Shader.highlight = love.graphics.newShader("Shader/highlight.gsl")
