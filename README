@@ -1,4 +1,8 @@
-Club*Nix project aiming to replace the physical
-whiteboard for fridge debt
+# Monix
 
-you need libmongoclient.a (the static lib) in a directory named "Driver"
+Account manager system
+
+## Dependencies
+- [lzmq](https://github.com/zeromq/lzmq)
+	* [luarocks](https://luarocks.org/)
+- [mongodb](https://www.mongodb.org/)
