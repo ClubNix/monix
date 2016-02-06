@@ -1,8 +1,8 @@
-# Monix
+# Monix #
 
 Account manager system
 
-## Dependencies
+## Dependencies ##
 - [lzmq](https://github.com/zeromq/lzmq)
 	* [luarocks](https://luarocks.org/)
 - [mongodb](https://www.mongodb.org/)
