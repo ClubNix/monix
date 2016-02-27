@@ -1,24 +1,33 @@
 #!/usr/bin/luajit
 
 zmq = require "lzmq"
+local MongoClient = require("mongorover.MongoClient")
 
 local context = zmq.init(1)
 
 local socket = context:socket(zmq.REP)
 socket:bind("tcp://*:5555")
 
-local nstick = 9
+local mongoClient = MongoClient.new("mongodb://localhost:27017/")
+local database = mongoClient:getDatabase("monix")
+local collection = database:getCollection("account")
+
+result = collection:find_one({name = "LIST"})
+
+local nstick = result.amount
 
 print("Start server")
-print("Actual number of sticks " .. nstick)
 
 while true do
 	local request = socket:recv()
-	print("Decrease by one")
-	nstick = nstick -1
-	print("Actual number of sticks " .. nstick)
+	if request ~= "start" then
+		nstick = nstick - request
+		local result = collection:update_one(
+			{name = "LIST"}, {["$set"] = {amount = nstick}}
+		)
+	end
 
-	socket:send("Number of sticks decreased")
+	socket:send(nstick)
 end
 
 socket:close()
