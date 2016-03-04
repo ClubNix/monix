@@ -1,6 +1,5 @@
-#!/usr/bin/luajit
-
-zmq = require "lzmq"
+print(utf8)
+local zmq = require "lzmq"
 local utf8 = require "utf8"
 local context = zmq.init(1)
 
@@ -36,7 +35,7 @@ function love.keypressed(key)
 		nstick = socket:recv()
 		var = ""
 	end
-	
+
 end
 
 function love.draw()

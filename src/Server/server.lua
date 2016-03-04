@@ -1,29 +1,35 @@
 #!/usr/bin/luajit
 
-zmq = require "lzmq"
+local zmq = require "lzmq"
 local MongoClient = require("mongorover.MongoClient")
 
 local context = zmq.init(1)
 
 local socket = context:socket(zmq.REP)
-socket:bind("tcp://*:5555")
+local uri = "tcp://*:5555"
+socket:bind(uri)
 
 local mongoClient = MongoClient.new("mongodb://localhost:27017/")
 local database = mongoClient:getDatabase("monix")
 local collection = database:getCollection("account")
 
-result = collection:find_one({name = "LIST"})
 
-local nstick = result.amount
+local nstick = 0
+local account = collection:find_one({name= "LIST"})
+if account then
+	nstick = account.amount
+else
+	collection:insert_one({name= "LIST", amount= 0})
+end
 
-print("Start server")
+print("server started on "..uri)
 
 while true do
 	local request = socket:recv()
 	if request ~= "start" then
 		nstick = nstick - request
 		local result = collection:update_one(
-			{name = "LIST"}, {["$set"] = {amount = nstick}}
+			{name= "LIST"}, {["$set"]= {amount= nstick}}
 		)
 	end
 
