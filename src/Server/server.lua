@@ -27,7 +27,7 @@ print("server started on "..uri)
 while true do
 	local request = socket:recv()
 	if request ~= "start" then
-		nstick = nstick - request
+		nstick = nstick + request
 		local result = collection:update_one(
 			{name= "LIST"}, {["$set"]= {amount= nstick}}
 		)
