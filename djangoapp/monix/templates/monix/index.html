@@ -1,0 +1,23 @@
+{% load static %}
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ 
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if user_list %}
+    <ul>
+    {% for user in user_list %}
+        <li>L'user {{ user.pseudo }} possède {{ user.baton }} batonnet(s).
+            <form action="{% url 'monix:remove' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ user.id }}"><br>
+                <input type="number" name="num" min="-100" max="100">
+                <input type="submit" value="Remove">
+                <input type="submit" formaction="{% url 'monix:add' %}" method="post" value="Add">
+            </form>
+             </br>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No user are available. Database empty !</p>
+{% endif %}
