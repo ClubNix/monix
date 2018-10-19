@@ -2,8 +2,24 @@
 
 Account manager system
 
-## Django dependencies
+## Django 
+### Dependencies
 Read requierements.txt
+
+### Install in virtualenv
+```bash
+virtualenv my_django
+source ./my_django/bin/activate
+cd monix/djangoapp
+pip3 install -r requirements.txt
+```
+
+### Deploy
+```bash
+python3 manage.py migrate
+python3 manage.py createsuperuser
+python3 manage.py runserver
+```
 
 ## Lua Dependencies
 - [löve](https://love2d.org/)
