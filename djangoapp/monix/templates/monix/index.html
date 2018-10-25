@@ -11,7 +11,7 @@
 
 {% if user_list %}
     
-    <input type="text" id="search" onkeyup="filterFunction()" placeholder="Rechercher un nom..">
+    <input type="text" id="search" onkeyup="filterFunction()" placeholder="Rechercher un nom.." autofocus>
 
     <ul id="user_list">
     {% for user in user_list %}
