@@ -7,11 +7,17 @@
 
 <body>
 
+{% if last_history %}
+    <div class={{ last_history.style }} >
+        {{ last_history.message }}
+    </div>
+{% endif %}
+
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 {% if user_list %}
     
-    <input type="text" id="search" onkeyup="filterFunction()" placeholder="Rechercher un nom.." autofocus>
+    <input type="text" id="search{{ time }}" onkeyup="filterFunction()" placeholder="Rechercher un nom.." autofocus>
 
     <ul id="user_list">
     {% for user in user_list %}
@@ -38,7 +44,7 @@
 function filterFunction() {
     // Declare variables
     var input, filter, ul, li, i;
-    input = document.getElementById('search');
+    input = document.getElementById('search{{ time }}');
     filter = input.value.toUpperCase();
     ul = document.getElementById("user_list");
     li = ul.getElementsByTagName('li');

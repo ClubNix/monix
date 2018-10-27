@@ -11,4 +11,7 @@ class Member(models.Model):
     baton = models.IntegerField(default=0)
     def __str__(self):
         return self.pseudo
-
+        
+class History(models.Model):
+    message = models.CharField(max_length=200, null=True)
+    style = models.CharField(max_length=200, null=True)
