@@ -2,52 +2,67 @@
 <html lang="fr">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "custom.css" %}">
     <title>Monix</title>
 </head>
 
 <body>
 
 {% if last_history %}
-    <div class={{ last_history.style }} >
+    <div class="alert alert-{{ last_history.style }} text-center" id="message_auto_hide">
         {{ last_history.message }}
     </div>
 {% endif %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 {% if user_list %}
-    
-    <input type="text" id="search{{ time }}" onkeyup="filterFunction()" placeholder="Rechercher un nom.." autofocus>
+    <div style="margin:10px;">
+    <input type="text" class="col-md-4 offset-md-4 searchbox " id="search{{ time }}" onkeyup="filterFunction()" placeholder="Rechercher un nom.." autofocus>
+    </div>
 
-    <ul id="user_list">
+    <table class="table table-striped table-hover">
+    <thead><tr><th>Pseudo</th> <th>Crédit (bâtons)</th> <th>Dépôt/Retrait</th></tr></thead>
+    <tbody id="user_list">
     {% for user in user_list %}
-        <li id="{{ user.pseudo }}">L'user {{ user.pseudo }} possède {{ user.baton }} batonnet{% if user.baton < -1 or user.baton > 1 %}s{% endif %}.
-            <form action="{% url 'monix:remove' %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="id" value="{{ user.id }}"><br>
-                <input type="number" name="num" min="-100" max="100">
-                <input type="submit" value="Remove">
-                <input type="submit" formaction="{% url 'monix:add' %}" method="post" value="Add">
-            </form>
-        </li>
+        <tr id="{{ user.pseudo }}">
+            <td>
+                {{ user.pseudo }}
+            </td>
+            <td>
+                {{ user.baton }}
+            </td>
+            <td>
+                <form class="input-group-append" action="{% url 'monix:remove' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ user.id }}"><br>
+                    <input type="number" name="num" min="-100" max="100">
+                    <input type="submit" value="Remove" class="btn btn-success">
+                    <input type="submit" value="Add" class="btn btn-outline-danger" formaction="{% url 'monix:add' %}" method="post">
+                </form>
+            </td>
+        </tr>
     {% endfor %}
-    </ul>
+    </tbody>
+    </table>
 {% else %}
     <p>No user are available. Database empty !</p>
 {% endif %}
 
-<a href="{% url 'admin:index' %}" id="admin">Admin panel</a>
+
+<div style="margin:10px;">
+    <a href="{% url 'admin:index' %}" id="admin" class="col-md-2 offset-md-5 btn btn-primary">Admin panel</a>
+</div>
 
 {% if user_list %}
-<script>
-// From https://www.w3schools.com/howto/howto_js_filter_lists.asp
+<script>/* Search filter https://www.w3schools.com/howto/howto_js_filter_lists.asp */
 function filterFunction() {
     // Declare variables
     var input, filter, ul, li, i;
     input = document.getElementById('search{{ time }}');
     filter = input.value.toUpperCase();
     ul = document.getElementById("user_list");
-    li = ul.getElementsByTagName('li');
+    li = ul.getElementsByTagName('tr');
 
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
@@ -57,8 +72,20 @@ function filterFunction() {
             li[i].style.display = "none";
         }
     }
-}
+};
 </script>
+
+<style> /* Auto hide confirmation message https://stackoverflow.com/a/21994053 */
+#message_auto_hide {
+    animation: cssAnimation 0s ease-in 5s forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        visibility:hidden;
+    }
+}
+</style>
 {% endif %}
 </body>
 </html>
