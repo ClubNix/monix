@@ -1,24 +1,15 @@
 # Monix
 
-Account manager system
+Short whiteboard for Club*Nix.
 
-## Deploy Django
-### Docker-compose
-Install docker-compose on your computer [here](https://docs.docker.com/compose/install/).
-Download git repository.
-If you have a custom css file, add it to your currrent folder.
-Launch it with `docker-compose up`
+## Deploy app
+1. Install docker-compose on your computer [here](https://docs.docker.com/compose/install/).
+- Download the `docker-compose.yml` file.
+- If you have a custom css file, add it to your currrent folder.
+- Edit the docker-compose.yml file.
+- Launch it with `docker-compose up`
 
-#### Create admin user
-If you need admin access (export/import data), please create an admin user.
-```
-docker-compose exec monix bash
-python manage.py createsuperuser
-```
-
-## Dev Django 
-### Dependencies
-Read requierements.txt
+## Dev Django
 
 ### Install in virtualenv
 ```bash

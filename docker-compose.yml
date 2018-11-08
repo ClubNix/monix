@@ -3,7 +3,8 @@ version: '3'
 services:
 
   monix:
-    build: .
+    #build: . # if local build for dev
+    image: guillu/monix #docker hub image
     environment:
       - DJANGO_ALLOWED_HOSTS=127.0.0.1
       - DJANGO_DEBUG_VALUE=True
@@ -17,9 +18,9 @@ services:
       - ./data:/code/djangoapp/data
      # if you have custom css file, uncomment the following line
      # - ./monix_custom.css:/code/djangoapp/monix/static/custom.css
-      
+
     ports:
-      - "8000:8000"
+      - "1234:8000" #choose a custom port instead of 1234
     #depends_on: # if POSTGRES
     #  - db
 
