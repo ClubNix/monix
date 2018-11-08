@@ -42,7 +42,7 @@ def change(request, sign):
         member.baton += int(number) * sign
         member.last_move = timezone.now()
         member.save()
-        f= open("logs.txt","a")
+        f= open("data/logs.txt","a")
         f.write(str(member.last_move.strftime("%Y-%m-%d %H:%M:%S"))
             + " "
             + str(member.pseudo)
@@ -52,6 +52,10 @@ def change(request, sign):
             + str(member.baton)
             + "\n")
         f.close()
+        if int(number) * sign <0:
+            style_alert = "success"
+        else:
+            style_alert = "warning"
         History.objects.get_or_create( #get if user uses back button
             message = (
                 str(int(number) * sign)
@@ -59,11 +63,11 @@ def change(request, sign):
                 + str(member.pseudo)
                 + str(member.last_move.strftime(" à %H:%M:%S."))
             ),
-            style = "good"
+            style = style_alert
         )
     else: # Ask to give an int
         History.objects.get_or_create( #get if user uses back button
-            message = "Please give an int", style = "error"
+            message = "Please give an int", style = "danger"
         )
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a

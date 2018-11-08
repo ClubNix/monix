@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  monix:
+    build: .
+    environment:
+      - DJANGO_ALLOWED_HOSTS=127.0.0.1
+      - DJANGO_DEBUG_VALUE=True
+      - DJANGO_SECRET_KEY=changethisstring
+      - ADMIN_LOGIN=admin
+      - ADMIN_PASS=admin
+      - ADMIN_MAIL=admin@localhost
+      # set POSTGRES if you want to use POSTGRES (name: db) instead of SQLITE
+      - DJANGO_DB=SQLITE
+    volumes:
+      - ./data:/code/djangoapp/data
+     # if you have custom css file, uncomment the following line
+     # - ./monix_custom.css:/code/djangoapp/monix/static/custom.css
+      
+    ports:
+      - "8000:8000"
+    #depends_on: # if POSTGRES
+    #  - db
+
+  #db:
+  #  image: postgres:10.1-alpine
