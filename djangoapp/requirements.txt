@@ -1,0 +1,4 @@
+Django>=2.1.2
+django-import-export
+gunicorn
+psycopg2-binary
