@@ -6,7 +6,7 @@ services:
     #build: . # if local build for dev
     image: guillu/monix #docker hub image
     environment:
-      - DJANGO_ALLOWED_HOSTS=127.0.0.1
+      - DJANGO_ALLOWED_HOSTS=["localhost", "127.0.0.1"]
       - DJANGO_DEBUG_VALUE=True
       - DJANGO_SECRET_KEY=changethisstring
       - ADMIN_LOGIN=admin
