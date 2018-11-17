@@ -18,7 +18,6 @@ class IndexView(generic.ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['time'] = datetime.now()
         if History.objects.exists():
             context['last_history'] = {
             'message' : History.objects.last().message,
@@ -39,7 +38,7 @@ def change(request, sign):
     if number == '': # If the string is empty, put 1 into the string
         number = '1'
     if check_int(number): # Check if the string is an int
-        member.baton += int(number) * sign
+        member.baton += abs(int(number)) * sign
         member.last_move = timezone.now()
         member.save()
         f= open("data/logs.txt","a")
