@@ -22,7 +22,7 @@
     </div>
 
     <table class="table table-striped table-hover">
-    <thead><tr><th>Pseudo</th> <th>Crédit (bâtons)</th> <th>Dépôt/Retrait</th></tr></thead>
+    <thead><tr><th>Pseudo</th> <th>Crédits (bâtons)</th> <th>Dépôt/Retrait</th></tr></thead>
     <tbody id="user_list">
     {% for user in user_list %}
         <tr id="{{ user.pseudo }}">
@@ -37,8 +37,8 @@
                     {% csrf_token %}
                     <input type="hidden" name="id" value="{{ user.id }}"><br>
                     <input type="number" name="num" min="-100" max="100">
-                    <input type="submit" value="Remove" class="btn btn-success">
-                    <input type="submit" value="Add" class="btn btn-outline-danger" formaction="{% url 'monix:add' %}" method="post">
+                    <input type="submit" value="Remove" class="btn btn-danger">
+                    <input type="submit" value="Add" class="btn btn-outline-success" formaction="{% url 'monix:add' %}" method="post">
                 </form>
             </td>
         </tr>
